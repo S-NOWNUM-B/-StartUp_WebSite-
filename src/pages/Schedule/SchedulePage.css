@@ -1,0 +1,298 @@
+/* Стили для страницы расписания */
+
+.schedule-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif; /* Предполагаемый шрифт из фигмы */
+  background-color: #FFFFFF; /* Фоновый цвет контейнера - теперь белый */
+  min-height: 100vh;
+  color: #333; /* Базовый цвет текста */
+}
+
+/* Шапка теперь представлена компонентом Header, стили для нее в Header.css */
+/*
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+*/
+
+.schedule-main-content {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 24px auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Основной контент (календарь/таблица) и сайдбар (ближайшие занятия) */
+  gap: 24px;
+  background-color: #FFFFFF; /* Основной контентный блок - белый фон */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Тень основного блока */
+}
+
+.schedule-main-content h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #333;
+  grid-column: 1 / -1; /* Заголовок на всю ширину */
+}
+
+.schedule-main-content > p {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 24px;
+  grid-column: 1 / -1; /* Подзаголовок на всю ширину */
+}
+
+.schedule-controls {
+  grid-column: 1 / -1; /* Контролы на всю ширину */
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.schedule-controls input[type="text"] {
+  flex-grow: 1;
+  padding: 10px 16px;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  min-width: 200px;
+}
+
+.schedule-controls button {
+  padding: 10px 20px;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.schedule-controls button.active {
+  background-color: #007AFF;
+  color: #FFFFFF;
+  border-color: #007AFF;
+}
+
+.schedule-controls button:not(.active):hover {
+  background-color: #F0F0F0;
+}
+
+.schedule-view {
+  grid-column: 1 / 2; /* Область календаря/таблицы в первой колонке */
+  background-color: #FFFFFF; /* Внутренние блоки тоже на белом фоне */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Тень */
+  padding: 24px;
+}
+
+.calendar-container {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap; /* Перенос элементов на мобильных */
+}
+
+.react-calendar {
+  border: none !important; /* Убираем стандартную границу календаря */
+  font-family: 'Inter', sans-serif !important;
+}
+
+.react-calendar__navigation button {
+  min-width: 44px !important;
+  background-color: none !important;
+}
+
+.react-calendar__navigation button:disabled {
+  background-color: #e5e5e5 !important;
+}
+
+.react-calendar__navigation button:enabled:hover, 
+.react-calendar__navigation button:enabled:focus {
+  background-color: #f0f0f0 !important;
+}
+
+.react-calendar__month-view__weekdays abbr {
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  color: #555 !important;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #d10000 !important; /* Красный цвет выходных */
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #777 !important;
+}
+
+.react-calendar__tile {
+  padding: 10px 6px !important;
+  border-radius: 4px !important;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.react-calendar__tile:enabled:hover, 
+.react-calendar__tile:enabled:focus {
+  background-color: #f0f0f0 !important;
+}
+
+.react-calendar__tile--now {
+  background: #e5e5e5 !important; /* Цвет сегодняшней даты */
+}
+
+.react-calendar__tile--now:enabled:hover, 
+.react-calendar__tile--now:enabled:focus {
+  background: #d4d4d4 !important;
+}
+
+.react-calendar__tile--active {
+  background: #007AFF !important; /* Цвет выбранной даты */
+  color: white !important;
+}
+
+.react-calendar__tile--active:enabled:hover, 
+.react-calendar__tile--active:enabled:focus {
+  background: #0056b3 !important;
+}
+
+.selected-date-classes {
+  flex-grow: 1; /* Занимает оставшееся пространство */
+  min-width: 250px; /* Минимальная ширина для адаптивности */
+}
+
+.selected-date-classes h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.class-item {
+  border: 1px solid #EEEEEE;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background-color: #F8F8F8; /* Светло-серый фон для карточек */
+}
+
+.class-item h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: #333;
+}
+
+.class-item p {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0;
+}
+
+.table-view table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-view th,
+.table-view td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #EEEEEE;
+  font-size: 14px;
+}
+
+.table-view th {
+  font-weight: 600;
+  color: #555;
+  background-color: #F8F8F8;
+}
+
+.table-view tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-view tbody tr:nth-child(even) {
+  background-color: #F8F8F8;
+}
+
+.upcoming-classes {
+  grid-column: 2 / 3; /* Сайдбар в второй колонке */
+  background-color: #FFFFFF; /* Внутренние блоки тоже на белом фоне */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Тень */
+  padding: 24px;
+  height: fit-content; /* Высота по содержимому */
+}
+
+.upcoming-classes h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #333;
+  border-bottom: 1px solid #EEEEEE;
+  padding-bottom: 16px;
+}
+
+.upcoming-class-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.upcoming-class-item:last-child {
+  border-bottom: none;
+}
+
+.class-time {
+  font-size: 16px;
+  font-weight: 600;
+  color: #007AFF; /* Цвет времени */
+  flex-shrink: 0; /* Предотвращаем сжатие времени */
+}
+
+.class-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: #333;
+}
+
+.class-info p {
+  font-size: 12px;
+  color: #777;
+  margin: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+  .schedule-main-content {
+    grid-template-columns: 1fr; /* Одна колонка на планшетах и мобильных */
+  }
+
+  .schedule-view,
+  .upcoming-classes {
+    grid-column: 1 / -1; /* Все секции на всю ширину */
+  }
+
+  .calendar-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .selected-date-classes {
+    min-width: auto;
+  }
+} 
