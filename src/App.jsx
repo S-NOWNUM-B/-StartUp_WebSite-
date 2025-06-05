@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // Импортируем компоненты страниц
-import HomePage from './pages/HomePage';
-import SchedulePage from './pages/SchedulePage';
-import GradesPage from './pages/GradesPage';
-import LearningMaterialsPage from './pages/LearningMaterialsPage';
-import CommunicationHubPage from './pages/CommunicationHubPage';
-// import AccountPage from './pages/AccountPage';
+import HomePage from './pages/Home/HomePage';
+import SchedulePage from './pages/Schedule/SchedulePage';
+import GradesPage from './pages/Grades/GradesPage';
+import LearningMaterialsPage from './pages/LearningMaterials/LearningMaterialsPage';
+import CommunicationHubPage from './pages/CommunicationHub/CommunicationHubPage';
+// import AccountPage from './pages/Account/AccountPage';
 // ... другие страницы
 
 function App() {
