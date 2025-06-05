@@ -1,0 +1,64 @@
+/* Стили для компонента Header */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px; /* Отступы из фигмы */
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-family: 'Inter', sans-serif; /* Используем тот же шрифт */
+}
+
+.header-logo {
+  font-size: 20px; /* Размер шрифта логотипа */
+  font-weight: 600; /* Насыщенность шрифта */
+  color: #333;
+}
+
+.header-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 32px; /* Расстояние между пунктами меню */
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav ul li a {
+  text-decoration: none;
+  color: #555; /* Цвет ссылок */
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 0; /* Добавляем отступы для активного состояния/hover */
+  position: relative;
+  transition: color 0.2s ease-in-out;
+}
+
+.header-nav ul li a:hover {
+    color: #000; /* Цвет при наведении */
+}
+
+/* Пример для активной ссылки - пока заглушка, потребуется логика в компоненте */
+.header-nav ul li a.active {
+    color: #000; /* Цвет активной ссылки */
+    font-weight: 600;
+    /* Можно добавить подчеркивание, если нужно */
+    /* border-bottom: 2px solid #007bff; */
+}
+
+.header-user-section {
+  display: flex;
+  align-items: center;
+  gap: 24px; /* Расстояние между иконками */
+}
+
+.header-user-section span {
+  font-size: 20px; /* Размер иконок */
+  color: #555; /* Цвет иконок */
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.header-user-section span:hover {
+    color: #000; /* Цвет иконок при наведении */
+} 

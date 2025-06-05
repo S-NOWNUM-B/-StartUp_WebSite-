@@ -1,13 +1,12 @@
 import React from 'react';
-// import './SchedulePage.css'; // Импортируем стили позже
+import './SchedulePage.css'; // Импортируем стили
+import Header from '../components/Header'; // Импортируем компонент Header
 
 function SchedulePage() {
   return (
     <div className="schedule-container">
-      {/* Заглушка для шапки/навигации - можно будет переиспользовать компонент из HomePage */}
-      <header className="schedule-header">
-        {/* ... содержимое шапки ... */}
-      </header>
+      {/* Заменяем заглушку шапки на компонент Header */}
+      <Header />
 
       <main className="schedule-main-content">
         <h1>My Schedule</h1>

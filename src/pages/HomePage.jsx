@@ -1,26 +1,12 @@
 import React from 'react';
 import './HomePage.css'; // Импортируем стили для главной страницы
+import Header from '../components/Header'; // Импортируем компонент Header
 
 function HomePage() {
   return (
     <div className="homepage-container">
-      {/* Заглушка для шапки/навигации */}
-      <header className="homepage-header">
-        <div className="logo">Academica</div>
-        <nav>
-          <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Courses</a></li>
-            <li><a href="#">Calendar</a></li>
-            <li><a href="#">Messages</a></li>
-          </ul>
-        </nav>
-        <div className="user-section">
-          {/* Заглушки для иконок уведомлений и профиля */}
-          <span>🔔</span>
-          <span>👤</span>
-        </div>
-      </header>
+      {/* Заменяем заглушку шапки на компонент Header */}
+      <Header />
 
       {/* Основное содержимое страницы */}
       <main className="homepage-main-content">

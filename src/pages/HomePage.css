@@ -9,6 +9,8 @@
   color: #333; /* Базовый цвет текста */
 }
 
+/* Шапка теперь представлена компонентом Header, стили для нее в Header.css */
+/*
 .homepage-header {
   display: flex;
   justify-content: space-between;
@@ -62,6 +64,7 @@
   color: #555; /* Цвет иконок */
   cursor: pointer;
 }
+*/
 
 .homepage-main-content {
   padding: 32px; /* Внутренние отступы */
@@ -75,7 +78,7 @@
 .homepage-main-content h1 {
   font-size: 24px; /* Размер заголовка */
   font-weight: 600;
-  margin-bottom: 8px; /* Отступ снизу */
+  margin-bottom: 4px; /* Уменьшенный отступ снизу */
   color: #333;
 }
 
@@ -96,10 +99,13 @@
 .user-avatar {
   width: 72px; /* Размер аватара */
   height: 72px;
-  background-color: #ddd; /* Заглушка для аватара */
+  background-color: #E0E0E0; /* Цвет заглушки аватара */
   border-radius: 50%;
   margin-right: 24px; /* Отступ справа */
   /* В реальном проекте здесь будет фоновое изображение */
+  background-image: url('/path/to/sophia-clark-avatar.png'); /* Замените на реальный путь к изображению */
+  background-size: cover;
+  background-position: center;
 }
 
 .user-info h2 {
@@ -146,6 +152,7 @@
   margin-right: 16px; /* Отступ справа перед переключателем */
 }
 
+/* Более точная стилизация переключателя */
 .toggle-switch {
   width: 40px; /* Ширина переключателя */
   height: 24px; /* Высота переключателя */
@@ -154,6 +161,7 @@
   cursor: pointer;
   position: relative;
   transition: background-color 0.2s ease-in-out;
+  flex-shrink: 0; /* Предотвращаем сжатие */
 }
 
 .toggle-switch::before {
@@ -168,11 +176,10 @@
     transition: transform 0.2s ease-in-out;
 }
 
-/* Пример стилей для включенного состояния (пока заглушка) */
 .toggle-switch.is-on {
-    background-color: #4CAF50; /* Цвет включенного переключателя (пример) */
+    background-color: #FF6B6B; /* Красный цвет включенного переключателя по макету */
 }
 
 .toggle-switch.is-on::before {
     transform: translateX(16px); /* Сдвиг ползунка */
-} 
+}
