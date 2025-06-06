@@ -1,82 +1,70 @@
-# AlmaU Student Portal
+# Getting Started with Create React App
 
-## Обзор
-**AlmaU Student Portal** — это веб-платформа, разработанная для улучшения студенческого опыта в Almaty Management University (AlmaU). Этот прототип предлагает современный, интуитивно понятный и интерактивный интерфейс, адаптированный под потребности студентов, обеспечивая удобный доступ к расписанию, оценкам, новостям, уведомлениям и общению с преподавателями. Портал создан с акцентом на пользовательский дизайн, упрощающий выполнение академических и кампусных задач, с сохранением визуально привлекательного и адаптивного интерфейса.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Этот проект разработан как прототип, демонстрирующий целостную концепцию, интерактивную навигацию и функциональные возможности с использованием современных веб-технологий и инструментов ИИ для генерации идей и дизайна.
+## Available Scripts
 
-## Функционал
-Портал AlmaU включает следующие ключевые функции, разработанные с учетом потребностей студентов и улучшения удобства использования:
+In the project directory, you can run:
 
-1. **Личный кабинет (Dashboard)**:
-   - Персонализированная панель с отображением предстоящих занятий, дедлайнов и непрочитанных уведомлений.
-   - Быстрый доступ к часто используемым функциям, таким как оценки и сообщения.
-   - **Обоснование**: Обеспечивает централизованный доступ к ключевой информации, минимизируя время на поиск данных.
+### `npm start`
 
-2. **Расписание**:
-   - Интерактивный календарь с фильтрами по дням, неделям и курсам.
-   - Возможность синхронизации с Google Calendar или другими приложениями.
-   - **Обоснование**: Упрощает планирование и позволяет студентам быть в курсе всех занятий.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-3. **Оценки**:
-   - Подробный просмотр текущих и итоговых оценок по курсам.
-   - Графики успеваемости для отслеживания прогресса.
-   - **Обоснование**: Помогает студентам отслеживать академическую успеваемость и выявлять области для улучшения.
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-4. **Новости и уведомления**:
-   - Лента новостей с фильтрами по категориям (академические, кампусные, мероприятия).
-   - Push-уведомления о важных событиях и дедлайнах.
-   - **Обоснование**: Держит студентов в курсе актуальных событий и сроков.
+### `npm test`
 
-5. **Чат с преподавателями**:
-   - Встроенная система обмена сообщениями для связи с преподавателями и однокурсниками.
-   - Возможность прикрепления файлов и создания групповых чатов.
-   - **Обоснование**: Упрощает коммуникацию и способствует оперативному решению вопросов.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-6. **Ресурсы и библиотека**:
-   - Доступ к учебным материалам, библиотечным ресурсам и онлайн-курсам.
-   - Поиск по ключевым словам и категориям.
-   - **Обоснование**: Обеспечивает удобный доступ к образовательным материалам в одном месте.
+### `npm run build`
 
-7. **Профиль студента**:
-   - Настройки профиля, включая персональные данные, предпочтения уведомлений и темы оформления.
-   - Возможность кастомизации интерфейса (светлая/темная тема).
-   - **Обоснование**: Повышает удобство использования и персонализацию.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Дизайн и UX
-- **Интерактивность**: Прототип создан в **Figma**, обеспечивая кликабельные переходы между экранами для демонстрации пользовательского пути.
-- **Логичность интерфейса**: Навигация построена на основе стандартных паттернов UX, с боковым меню и фиксированной панелью для быстрого доступа. Основной акцент — на минимализм и интуитивность.
-- **Адаптивность**: Дизайн оптимизирован для десктопных и мобильных устройств, с акцентом на мобильный опыт, так как студенты чаще используют смартфоны.
-- **Визуальный стиль**: Современный дизайн с использованием цветовой палитры AlmaU (синий, белый, акценты оранжевого), плоскими иконками и читаемыми шрифтами (Roboto, Open Sans).
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-**Пример использования**: ИИ помог сформулировать сценарии использования (например, "студент проверяет оценки и получает уведомление о новом дедлайне"), а также предложил варианты упрощения навигации на основе анализа популярных приложений (Notion, Canvas).
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Процесс разработки
-1. **Анализ потребностей**:
-   - Изучены существующие системы AlmaU (например, Platonus) и выявлены недостатки: устаревший интерфейс, медленная загрузка, отсутствие мобильной версии.
-   - Проведено исследование аналогов (Canvas, Blackboard, Moodle) для определения лучших практик.
+### `npm run eject`
 
-2. **Идеация**:
-   - Использован ChatGPT для генерации списка функций, которые могут быть полезны студентам.
-   - Проведен анализ трендов в UX/UI через Dribbble и Behance для формирования насмотренности.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-3. **Прототипирование**:
-   - Создан прототип в **Figma** с кликабельными экранами, демонстрирующими основные пользовательские пути (например, от входа в систему до проверки расписания).
-   - Протестирована навигация на небольшой группе студентов для проверки логичности.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-4. **Дизайн**:
-   - Использованы сгенерированные MidJourney иконки и элементы для создания уникального стиля.
-   - Адаптированы цвета и шрифты под бренд AlmaU.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-5. **Документация**:
-   - Подготовлен данный README для описания проекта.
-   - Создана презентация в **Canva** для демонстрации концепции и процесса разработки.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Установка и запуск
-Для локального запуска прототипа:
-1. Склонируйте репозиторий:
-   ```bash
-   git clone https://github.com/username/almau-student-portal.git
-   ```
-2. Откройте `index.html` в браузере для просмотра статических страниц.
-3. Для просмотра интерактивного прототипа перейдите по ссылке на Figma: [https://www.figma.com/design/2bUXLFv0NyS8OJ8eUBGKWz/Дизайн-платформы-для-Университета?node-id=0-1&p=f&t=6WBgdfq2JKxMGuoN-0](#)
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
