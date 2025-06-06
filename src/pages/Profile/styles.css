@@ -1,0 +1,68 @@
+.profile-card {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-name h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-color);
+}
+
+.profile-name p {
+  color: #666;
+  margin: 0;
+}
+
+.profile-details {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.detail-group {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.detail-group label {
+  color: #666;
+  font-weight: 500;
+}
+
+.detail-group p {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-card {
+    padding: 1rem;
+  }
+} 

@@ -1,0 +1,41 @@
+.schedule-list {
+  margin-top: 2rem;
+}
+
+.schedule-item {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.schedule-time {
+  min-width: 120px;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.schedule-details h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-color);
+}
+
+.schedule-details p {
+  margin: 0;
+  color: #666;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+  .schedule-item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .schedule-time {
+    min-width: auto;
+  }
+} 
