@@ -1,75 +1,105 @@
+.page-content {
+    /* Добавляем стили для page-content, если они еще не определены */
+    width: 100%; /* Убедимся, что занимает всю доступную ширину */
+    box-sizing: border-box; /* Учитываем padding в ширине */
+}
+
 .tasks-list {
     margin-top: 2rem;
-    display: grid;
-    gap: 1rem;
+    overflow-x: auto; /* Добавляем горизонтальную прокрутку для списка задач/таблицы */
+    padding-bottom: 10px; /* Добавляем небольшой отступ снизу для полосы прокрутки на тач-устройствах */
+    width: 100%; /* Убедимся, что контейнер занимает всю доступную ширину */
+    box-sizing: border-box; /* Учитываем padding в ширине контейнера */
 }
 
-.task-item {
+.tasks-list table {
+    width: 100%; /* Убедимся, что таблица занимает всю доступную ширину контейнера */
+    /* min-width: 600px; Опционально: минимальная ширина для предотвращения слишком сильного сжатия */
+    border-collapse: collapse;
     background: white;
-    border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    table-layout: fixed; /* Фиксируем макет таблицы для лучшего контроля ширины колонок */
 }
 
-.task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+.tasks-list th,
+.tasks-list td {
+    padding: 1rem; /* Отступы в ячейках */
+    text-align: left;
+    border-bottom: 1px solid var(--border-color); /* Разделители строк */
+    word-wrap: break-word; /* Переносим длинные слова */
+    overflow: hidden; /* Скрываем содержимое, которое выходит за границы ячейки */
+    text-overflow: ellipsis; /* Добавляем многоточие для обрезанного текста */
 }
 
-.task-header h3 {
-    margin: 0;
-    color: var(--primary-color);
+/* Дополнительные стили для содержимого ячеек, чтобы предотвратить их растяжение */
+.tasks-list td {
+    white-space: nowrap; /* Предотвращаем перенос строк */
+    overflow: hidden; /* Убедимся, что содержимое обрезается */
+    text-overflow: ellipsis; /* Добавляем многоточие */
 }
 
-.status-badge {
+/* Задаем ширину колонкам */
+.tasks-list th:nth-child(1), .tasks-list td:nth-child(1) { width: 35%; } /* Задание */
+.tasks-list th:nth-child(2), .tasks-list td:nth-child(2) { width: 25%; } /* Предмет */
+.tasks-list th:nth-child(3), .tasks-list td:nth-child(3) { width: 20%; } /* Дедлайн */
+.tasks-list th:nth-child(4), .tasks-list td:nth-child(4) { width: 20%; } /* Статус */
+
+.tasks-list th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 500;
+}
+
+.tasks-list tr:last-child td {
+    border-bottom: none;
+}
+
+/* Стили для статусов */
+.tasks-list .status-в-процессе,
+.tasks-list .status-не-начато,
+.tasks-list .status-завершено {
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.9rem;
     font-weight: 500;
+    display: inline-block;
+    text-align: center;
+    min-width: 80px; /* Минимальная ширина для бейджа статуса */
 }
 
-.status-в-работе {
+.tasks-list .status-в-процессе {
     background-color: var(--warning-color);
     color: #000;
 }
 
-.status-не-начато {
+.tasks-list .status-не-начато {
     background-color: #95a5a6;
     color: white;
 }
 
-.status-завершено {
+.tasks-list .status-завершено {
     background-color: var(--success-color);
     color: white;
 }
 
-.task-details {
-    color: #666;
-}
-
-.priority-high {
-    border-left: 4px solid var(--danger-color);
-}
-
-.priority-medium {
-    border-left: 4px solid var(--warning-color);
-}
-
+/* Удаленные или переопределенные старые стили */
+.task-item,
+.task-header,
+.status-badge,
+.task-details,
+.priority-high,
+.priority-medium,
 .priority-low {
-    border-left: 4px solid var(--success-color);
+    /* Убедимся, что эти стили не влияют на таблицу */
+    /* display: none; */
 }
 
 /* Адаптивный дизайн */
 @media (max-width: 768px) {
-    .task-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-
-    .task-item {
-        padding: 1rem;
-    }
+  .tasks-list th,
+  .tasks-list td {
+    padding: 0.75rem;
+  }
 }

@@ -1,0 +1,159 @@
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+}
+
+.tab {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  color: #666;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+/* Стили для сообщений */
+.messages-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.message-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.message-card:hover {
+  transform: translateY(-2px);
+}
+
+.message-card.unread {
+  border-left: 4px solid var(--primary-color);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.message-header h3 {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.message-date {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.message-sender {
+  color: #666;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.message-content {
+  color: #333;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.reply-button {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reply-button:hover {
+  background-color: #2563eb;
+}
+
+/* Стили для объявлений */
+.announcements-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.announcement-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.announcement-card.priority-high {
+  border-left: 4px solid #ef4444;
+}
+
+.announcement-card.priority-medium {
+  border-left: 4px solid #f59e0b;
+}
+
+.announcement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.announcement-header h3 {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.announcement-date {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.announcement-content {
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+  .tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tab {
+    width: 100%;
+    text-align: left;
+  }
+
+  .message-card,
+  .announcement-card {
+    padding: 1rem;
+  }
+} 

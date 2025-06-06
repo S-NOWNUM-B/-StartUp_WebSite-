@@ -8,6 +8,8 @@
   --success-color: #27ae60;
   --warning-color: #f1c40f;
   --danger-color: #e74c3c;
+  --sidebar-width-closed: 70px;
+  --sidebar-width-open: 260px;
 }
 
 * {
@@ -21,27 +23,40 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
+  overflow-y: scroll; /* Всегда показывать полосу прокрутки для предотвращения смещения */
 }
 
 .app {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: flex; /* Используем Flexbox */
+  flex-direction: row; /* Элементы располагаются в строку */
 }
 
 .main-content {
-  flex: 1;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+  flex: 1; /* Занимает все доступное пространство */
+  min-width: 0; /* Позволяем Flexbox сжимать этот элемент */
+  padding: 2rem; /* Внутренние отступы */
+  /* Убираем margin-left, flexbox сам управляет пространством */
+  /* Убираем max-width */
+  /* Убираем width: calc() */
+  box-sizing: border-box; /* Учитываем padding в ширине */
+  transition: margin-left 0.3s ease, width 0.3s ease; /* Оставляем переход, если он нужен для других целей, но основное смещение будет работать без него */
+  overflow-x: hidden; /* Скрываем горизонтальную прокрутку в основном контенте */
+}
+
+.main-content.shifted {
+  /* В этом случае, при использовании flexbox, нам может не понадобиться явно менять margin-left */
+  /* Если сайдбар фиксированный и занимает место, flex: 1 в main-content автоматически займет остальное */
+  /* margin-left: var(--sidebar-width-open); */
+  /* width: calc(100% - var(--sidebar-width-open)); */
 }
 
 .container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  width: 100%; /* Занимаем всю доступную ширину родителя (.main-content) */
+  max-width: 1200px; /* Ограничиваем максимальную ширину контента внутри контейнера */
+  margin: 0 auto; /* Центрируем контейнер */
+  padding: 0 1rem; /* Горизонтальные отступы внутри контейнера */
+  box-sizing: border-box; /* Учитываем padding в общей ширине контейнера */
 }
 
 .page-content {
@@ -84,4 +99,38 @@ button:hover {
   .page-content {
     padding: 1rem;
   }
+}
+
+/* Корректируем стили боковой панели, чтобы она не влияла на flex-контейнер, если она фиксирована */
+.sidebar {
+    width: var(--sidebar-width-open); /* Ширина боковой панели */
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
+    height: 100vh;
+    position: fixed; /* Остается фиксированной */
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease; /* Плавный переход при изменении ширины */
+    z-index: 100; /* Убедимся, что сайдбар поверх контента */
+    flex-shrink: 0; /* Запрещаем сжатие сайдбара */
+}
+
+.sidebar.closed {
+  width: var(--sidebar-width-closed); /* Узкая ширина в закрытом состоянии */
+  align-items: center;
+}
+
+/* Добавляем отступ к основному контенту, чтобы он не перекрывался фиксированным сайдбаром */
+.app > main {
+    margin-left: var(--sidebar-width-open); /* Отступ равен ширине ОТКРЫТОГО сайдбара */
+    transition: margin-left 0.3s ease; /* Плавный переход отступа */
+}
+
+.app.sidebar-closed > main {
+    margin-left: var(--sidebar-width-closed); /* Отступ равен ширине ЗАКРЫТОГО сайдбара */
 } 

@@ -1,0 +1,32 @@
+ /* Стили для Navigation.js */
+.main-nav {
+    transition: transform 0.3s ease-in-out;
+}
+
+.main-nav .nav-brand {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.main-nav .nav-links a {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.main-nav .nav-links a:hover {
+    transform: translateX(5px);
+}
+
+.dark-mode .main-nav {
+    background: linear-gradient(to bottom, #1f2937, #374151);
+}
+
+.dark-mode .main-nav .nav-brand {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark-mode .main-nav .nav-links a {
+    color: #e5e7eb;
+}
+
+.dark-mode .main-nav .nav-links a:hover {
+    background: #4b5563;
+}
