@@ -1,41 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Sidebar.css';
 
-// Пример иконок (можно заменить на реальные из библиотеки) - используем текстовые заглушки
+// Icons using Bootstrap icons
 const icons = {
-  dashboard: '🏠',
-  academic: '📚',
-  schedule: '📅',
-  grades: '🏆',
-  plan: '📄',
-  materials: '📖',
-  tasks: '✅',
-  testing: '📝',
-  appeals: '⚖️',
-  transcript: '📜',
-  teachers: '👨‍🏫',
-  news: '📰',
-  announcements: '📣',
-  events: '🎟️',
-  notifications: '🔔',
-  profile: '👤',
-  settings: '⚙️',
-  documents: '📁',
-  finance: '💳',
-  communications: '💬',
-  messages: '✉️',
-  forums: '🗣️',
-  contacts: '📞',
-  resources: '💡',
-  library: '🏛️',
-  sports: '🏋️‍♀️',
-  campus: '🗺️',
+  dashboard: 'bi bi-house-door',
+  academic: 'bi bi-book',
+  schedule: 'bi bi-calendar3',
+  grades: 'bi bi-trophy',
+  plan: 'bi bi-file-text',
+  materials: 'bi bi-journal-text',
+  tasks: 'bi bi-check2-square',
+  testing: 'bi bi-pencil-square',
+  appeals: 'bi bi-shield-check',
+  transcript: 'bi bi-file-earmark-text',
+  teachers: 'bi bi-person-badge',
+  news: 'bi bi-newspaper',
+  announcements: 'bi bi-megaphone',
+  events: 'bi bi-calendar-event',
+  notifications: 'bi bi-bell',
+  profile: 'bi bi-person-circle',
+  settings: 'bi bi-gear',
+  documents: 'bi bi-folder',
+  finance: 'bi bi-credit-card',
+  communications: 'bi bi-chat-dots',
+  messages: 'bi bi-envelope',
+  forums: 'bi bi-chat-square-text',
+  contacts: 'bi bi-telephone',
+  resources: 'bi bi-lightbulb',
+  library: 'bi bi-building',
+  sports: 'bi bi-trophy',
+  campus: 'bi bi-geo-alt',
 };
 
-function Sidebar({ isOpen, toggleSidebar }) {
+function Sidebar({ isOpen, toggleSidebar, sidebarRef }) {
   // Состояние для отслеживания открытых подменю
   const [openSections, setOpenSections] = useState({});
+
+  // Close all sections when sidebar is closed
+  useEffect(() => {
+    if (!isOpen) {
+      setOpenSections({});
+    }
+  }, [isOpen]);
 
   // Функция для переключения состояния подменю
   const toggleSection = (sectionName) => {
@@ -53,7 +61,6 @@ function Sidebar({ isOpen, toggleSidebar }) {
 
   // Определение структуры меню
   const menuStructure = [
-    { name: 'Главная', path: '/', icon: icons.dashboard, isSection: false },
     {
       name: 'Учебный процесс',
       icon: icons.academic,
@@ -97,57 +104,71 @@ function Sidebar({ isOpen, toggleSidebar }) {
   ];
 
   return (
-    <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
-      <div className="sidebar-header">
-        <h2>Student Hub</h2>
-        {/* Кнопка для закрытия/открытия сайдбара в открытом состоянии */}
-        {isOpen && <button className="close-sidebar-btn" onClick={toggleSidebar}>×</button>}
+    <div ref={sidebarRef} className={`sidebar bg-dark text-white ${isOpen ? 'open' : 'closed'}`}>
+      <div className="sidebar-header d-flex justify-content-between align-items-center border-bottom border-secondary">
+        {isOpen ? (
+          <NavLink to="/" className="text-white text-decoration-none d-flex align-items-center h4 mb-0">
+            <i className="bi bi-mortarboard-fill me-2"></i>
+            <span>AlmaU Hub</span>
+          </NavLink>
+        ) : (
+          <NavLink to="/" className="text-white text-decoration-none h4 mb-0">
+            <i className="bi bi-mortarboard-fill"></i>
+          </NavLink>
+        )}
+        {isOpen && (
+          <button 
+            className="btn btn-link text-white" 
+            onClick={toggleSidebar}
+          >
+            <i className="bi bi-x-lg"></i>
+          </button>
+        )}
       </div>
-      <ul className="sidebar-nav-links">
+      
+      <ul className="nav flex-column p-2">
         {menuStructure.map((item, index) => (
-          <li key={index}>
+          <li key={index} className="nav-item">
             {item.isSection ? (
               <div
-                className={`section-header ${openSections[item.name] ? 'open' : ''}`}
-                onClick={() => {
-                  // Логика переключения секции уже включает открытие сайдбара при необходимости
-                  toggleSection(item.name);
-                }}
+                className={`nav-link d-flex align-items-center justify-content-between ${openSections[item.name] ? 'active' : ''}`}
+                onClick={() => toggleSection(item.name)}
+                style={{ cursor: 'pointer' }}
               >
-                <span className="menu-icon">{item.icon}</span>
-                {isOpen && <span>{item.name}</span>}
-                {isOpen && <span className="arrow">{openSections[item.name] ? '▼' : '►'}</span>}
+                <div className="d-flex align-items-center">
+                  <i className={`${item.icon} me-2`}></i>
+                  {isOpen && <span>{item.name}</span>}
+                </div>
+                {isOpen && (
+                  <i className={`bi ${openSections[item.name] ? 'bi-chevron-down' : 'bi-chevron-right'}`}></i>
+                )}
               </div>
             ) : (
               <NavLink
                 to={item.path}
                 end={item.path === '/'}
-                className={({ isActive }) => `
-                  menu-item
-                  ${isActive ? 'active' : ''}
-                  ${!isOpen ? 'closed' : ''}
-                `}
+                className={({ isActive }) => 
+                  `nav-link d-flex align-items-center ${isActive ? 'active' : ''}`
+                }
                 // При клике на обычную ссылку в закрытом сайдбаре, просто открываем его
                 onClick={!isOpen ? toggleSidebar : undefined}
               >
-                <span className="menu-icon">{item.icon}</span>
+                <i className={`${item.icon} me-2`}></i>
                 {isOpen && <span>{item.name}</span>}
               </NavLink>
             )}
 
             {item.isSection && openSections[item.name] && isOpen && (
-              <ul className="submenu-links">
+              <ul className="nav flex-column ms-4 mt-1">
                 {item.items.map((subItem, subIndex) => (
-                  <li key={subIndex}>
+                  <li key={subIndex} className="nav-item">
                     <NavLink
                       to={subItem.path}
-                      end={subItem.path === '/'}
-                      className={({ isActive }) => `
-                        submenu-item
-                        ${isActive ? 'active' : ''}
-                      `}
+                      className={({ isActive }) => 
+                        `nav-link py-1 ${isActive ? 'active' : ''}`
+                      }
                     >
-                      <span>{subItem.name}</span>
+                      {subItem.name}
                     </NavLink>
                   </li>
                 ))}
@@ -158,8 +179,13 @@ function Sidebar({ isOpen, toggleSidebar }) {
       </ul>
       {/* Кнопка для открытия сайдбара в закрытом состоянии */}
       {!isOpen && (
-        <div className="open-sidebar-btn-container">
-          <button className="open-sidebar-btn" onClick={toggleSidebar}>▶</button>
+        <div className="position-absolute bottom-0 start-0 w-100 p-2">
+          <button 
+            className="btn btn-outline-light w-100" 
+            onClick={toggleSidebar}
+          >
+            <i className="bi bi-chevron-right"></i>
+          </button>
         </div>
       )}
     </div>

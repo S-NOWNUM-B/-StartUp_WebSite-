@@ -27,34 +27,40 @@ function TasksPage() {
   ];
 
   return (
-    <div className="container">
-      <div className="page-content">
-        <h2>Учебные задачи</h2>
-        <p>Ваши текущие задания и дедлайны</p>
+    <div className="container py-4">
+      <div className="page-content card">
+        <div className="page-header">
+          <h2 className="mb-3">Учебные задачи</h2>
+          <p className="lead text-muted mb-4">Ваши текущие задания и дедлайны</p>
+        </div>
 
         <div className="tasks-list">
-          <table>
-            <thead>
-              <tr>
-                <th>Задание</th>
-                <th>Предмет</th>
-                <th>Дедлайн</th>
-                <th>Статус</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tasksData.map(item => (
-                <tr key={item.id}>
-                  <td>{item.title}</td>
-                  <td>{item.subject}</td>
-                  <td>{item.deadline}</td>
-                  <td className={`status-${item.status.toLowerCase().replace(' ', '-')}`}>
-                    {item.status}
-                  </td>
+          <div className="table-responsive">
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Задание</th>
+                  <th scope="col">Предмет</th>
+                  <th scope="col">Дедлайн</th>
+                  <th scope="col">Статус</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {tasksData.map(item => (
+                  <tr key={item.id}>
+                    <td>{item.title}</td>
+                    <td>{item.subject}</td>
+                    <td>{item.deadline}</td>
+                    <td>
+                      <span className={`badge rounded-pill status-${item.status.toLowerCase().replace(' ', '-')}`}>
+                        {item.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ function Navigation() {
   return (
     <nav className="main-nav">
       <div className="nav-brand">
-        <h1>Student Hub</h1>
+        <h1>AlmaU Hub</h1>
       </div>
       <ul className="nav-links">
         <li>

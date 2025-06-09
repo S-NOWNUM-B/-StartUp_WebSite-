@@ -1,15 +1,15 @@
 .schedule-list {
-  margin-top: 2rem;
+  margin-top: var(--spacing-xl);
 }
 
 .schedule-item {
-  background: white;
+  background: var(--white);
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
   display: flex;
-  gap: 1rem;
+  gap: var(--spacing-md);
 }
 
 .schedule-time {
@@ -19,20 +19,20 @@
 }
 
 .schedule-details h3 {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 var(--spacing-xs) 0;
   color: var(--primary-color);
 }
 
 .schedule-details p {
   margin: 0;
-  color: #666;
+  color: var(--text-color-dark);
 }
 
 /* Адаптивный дизайн */
 @media (max-width: 768px) {
   .schedule-item {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--spacing-sm);
   }
 
   .schedule-time {

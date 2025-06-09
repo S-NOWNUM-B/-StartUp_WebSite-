@@ -1,25 +1,26 @@
 .grades-table {
-  margin-top: 2rem;
+  margin-top: var(--spacing-xl);
   overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
-  border-radius: 8px;
+  background: var(--white);
+  border-radius: 0.5rem;
   overflow: hidden;
+  box-shadow: var(--shadow-light);
 }
 
 th, td {
-  padding: 1rem;
+  padding: var(--spacing-md);
   text-align: left;
   border-bottom: 1px solid var(--border-color);
 }
 
 th {
   background-color: var(--primary-color);
-  color: white;
+  color: var(--white);
   font-weight: 500;
 }
 
@@ -28,7 +29,7 @@ tr:last-child td {
 }
 
 .grade-a {
-  color: var(--success-color);
+  color: var(--accent-color);
   font-weight: bold;
 }
 
@@ -45,6 +46,6 @@ tr:last-child td {
 /* Адаптивный дизайн */
 @media (max-width: 768px) {
   th, td {
-    padding: 0.75rem;
+    padding: var(--spacing-sm);
   }
 } 

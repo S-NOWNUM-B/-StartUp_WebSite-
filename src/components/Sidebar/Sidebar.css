@@ -1,198 +1,178 @@
 :root {
-    --sidebar-width-open: 300px;
+    --sidebar-width-open: 280px;
     --sidebar-width-closed: 60px;
 }
 
 .sidebar {
-  width: var(--sidebar-width-open); /* Ширина боковой панели */
-  background-color: #2c3e50; /* Темный фон */
-  color: white; /* Белый текст */
-  padding: 1rem; /* Отступы внутри панели */
-  height: 100vh; /* Высота на всю высоту окна */
-  position: fixed; /* Фиксированное позиционирование */
-  top: 0; /* Прижать к верху */
-  left: 0; /* Прижать к левому краю */
-  overflow-y: auto; /* Добавить прокрутку, если контента много */
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Легкая тень справа */
-  display: flex; /* Flexbox для содержимого */
-  flex-direction: column; /* Элементы в колонку */
-  transition: width 0.3s ease; /* Плавный переход при изменении ширины */
+  width: var(--sidebar-width-open);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+  z-index: 1030;
 }
 
 .sidebar.closed {
-  width: var(--sidebar-width-closed); /* Узкая ширина в закрытом состоянии */
-  align-items: center; /* Центрируем элементы */
+  width: var(--sidebar-width-closed);
 }
 
-.sidebar.closed .sidebar-header h2, /* Скрываем заголовок в закрытом состоянии */
-.sidebar.closed .arrow,
-.sidebar.closed .section-header span:not(.menu-icon),
-.sidebar.closed .submenu-links {
-    display: none;
+/* Custom scrollbar for the sidebar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
 }
 
-.sidebar-header {
-  text-align: center;
-  margin-bottom: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%; /* Заголовок занимает всю ширину */
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.sidebar-header h2 {
-  color: white;
-  margin: 0;
-  font-size: 1.5rem; /* Чуть меньше размер */
-  transition: opacity 0.3s ease;
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
 }
 
-.close-sidebar-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0;
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
-.open-sidebar-btn-container {
-  margin-top: auto; /* Прижимаем кнопку открытия к низу */
-  width: 100%;
-  text-align: center;
-}
-
-.open-sidebar-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0;
-}
-
-.sidebar-nav-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%; /* Ссылки занимают всю ширину */
-}
-
-.sidebar-nav-links li {
-  margin-bottom: 0.5rem; /* Меньший отступ между элементами верхнего уровня */
-}
-
-.section-header {
-  display: flex;
-  align-items: center;
-  color: #bdc3c7; /* Цвет заголовка раздела */
-  padding: 0.75rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  user-select: none; /* Запретить выделение текста */
-}
-
-.section-header:hover {
-    background-color: #34495e;
-    color: white;
-}
-
-.section-header .arrow {
-  margin-left: auto; /* Стрелка справа */
-  transition: transform 0.3s ease;
-}
-
-.section-header.open .arrow {
-    transform: rotate(90deg); /* Поворот стрелки при открытии */
-}
-
-.menu-icon {
-    margin-right: 10px;
-    font-size: 1.2rem; /* Размер иконки */
-     min-width: 20px; /* Фиксированная ширина для иконки */
-    text-align: center;
-}
-
-.sidebar.closed .menu-icon {
-    margin-right: 0; /* Убираем отступ справа в закрытом состоянии */
-}
-
-.menu-item {
-  color: #bdc3c7;
-  text-decoration: none;
-  font-size: 1.1rem;
-  padding: 0.75rem 1rem;
-  display: flex; /* Flexbox для иконки и текста */
-  align-items: center;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.menu-item:hover {
-    background-color: #34495e;
-    color: white;
-}
-
-.menu-item.active {
-  background-color: #3498db; /* Активный цвет фона */
-  color: white; /* Активный цвет текста */
-  font-weight: bold;
-}
-
-.submenu-links {
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0 0.5rem 25px; /* Отступ для подменю */
-  border-left: 1px solid rgba(255, 255, 255, 0.1); /* Визуальный разделитель подменю */
-}
-
-.submenu-links li {
-  margin-bottom: 0.25rem; /* Меньший отступ между элементами подменю */
-}
-
-.submenu-item {
-  color: #bdc3c7;
-  text-decoration: none;
-  font-size: 1rem; /* Меньший размер шрифта для подменю */
+/* Navigation links styling */
+.sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
   padding: 0.5rem 1rem;
-  display: block;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
 }
 
-.submenu-item:hover {
-    background-color: #34495e;
-    color: white;
+.sidebar .nav-link:hover {
+  color: #fff !important;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.submenu-item.active {
-    background-color: #2980b9; /* Активный цвет фона для подменю */
-    color: white;
-    font-weight: bold;
+.sidebar .nav-link.active {
+  color: #fff !important;
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Адаптивный дизайн для сайдбара - если нужно адаптировать ширину на мобильных */
+/* Submenu styling */
+.sidebar .nav-item .nav-link {
+  font-size: 0.9rem;
+}
+
+/* Icons styling */
+.sidebar .bi {
+  font-size: 1.1rem;
+  width: 1.5rem;
+  text-align: center;
+}
+
+/* Closed state styling */
+.sidebar.closed .nav-link span {
+  display: none;
+}
+
+.sidebar.closed .nav-link {
+  padding: 0.5rem;
+  justify-content: center;
+}
+
+.sidebar.closed .nav-link .bi {
+  margin: 0;
+}
+
+/* Styling for the logo icon when sidebar is closed */
+.sidebar.closed .sidebar-header .bi-mortarboard-fill {
+  margin-right: 0 !important; /* Ensure no extra margin */
+  font-size: 1.8rem; /* Make the logo slightly larger */
+}
+
+/* Remove active background when sidebar is closed */
+.sidebar.closed .nav-link.active {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.8) !important; /* Reset text color for active link when sidebar is closed */
+}
+
+/* Ensure no background or highlight on any item when sidebar is closed */
+.sidebar.closed .nav-item .nav-link,
+.sidebar.closed .nav-item .nav-link:hover,
+.sidebar.closed .nav-item .nav-link.active {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  color: rgba(255, 255, 255, 0.8) !important; /* Reset text color to default for all states */
+  font-weight: normal !important; /* Ensure font weight is normal */
+}
+
+/* Header styling */
+.sidebar-header {
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.sidebar-header .text-white.text-decoration-none {
+  background-color: transparent !important;
+  background: none !important;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-header .text-white.text-decoration-none .bi {
+  line-height: 1;
+}
+
+.sidebar-header .text-white.text-decoration-none span {
+  line-height: 1;
+}
+
+/* Toggle button styling */
+.sidebar .btn-link {
+  text-decoration: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0;
+}
+
+.sidebar .btn-link:hover {
+  opacity: 0.8;
+  background-color: transparent;
+}
+
+.sidebar .btn-link .bi {
+  line-height: 1 !important;
+  font-size: 1.5rem;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Submenu animation */
+.nav-item .nav {
+  transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .sidebar.closed {
-    width: 0; /* Полностью скрываем сайдбар на очень узких экранах, если он закрыт */
-    overflow-x: hidden;
+  .sidebar {
+    width: 100%;
+    transform: translateX(-100%);
   }
 
   .sidebar.open {
-    width: 200px; /* Меньшая ширина на мобильных */
+    transform: translateX(0);
   }
 
-   .sidebar-header h2 {
-        font-size: 1.2rem;
-    }
-
-    .section-header,
-    .menu-item {
-        padding: 0.5rem 0.75rem;
-    }
-
-    .menu-icon {
-        margin-right: 5px;
-    }
+  .sidebar.closed {
+    width: 100%;
+  }
 } 

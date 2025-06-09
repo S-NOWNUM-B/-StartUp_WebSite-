@@ -8,13 +8,18 @@
   --success-color: #27ae60;
   --warning-color: #f1c40f;
   --danger-color: #e74c3c;
-  --sidebar-width-closed: 70px;
-  --sidebar-width-open: 260px;
+  --sidebar-width-open: 280px;
+  --sidebar-width-closed: 60px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку */
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -28,27 +33,17 @@ body {
 
 .app {
   min-height: 100vh;
-  display: flex; /* Используем Flexbox */
-  flex-direction: row; /* Элементы располагаются в строку */
+  background-color: #f8f9fa;
 }
 
 .main-content {
-  flex: 1; /* Занимает все доступное пространство */
-  min-width: 0; /* Позволяем Flexbox сжимать этот элемент */
-  padding: 2rem; /* Внутренние отступы */
-  /* Убираем margin-left, flexbox сам управляет пространством */
-  /* Убираем max-width */
-  /* Убираем width: calc() */
-  box-sizing: border-box; /* Учитываем padding в ширине */
-  transition: margin-left 0.3s ease, width 0.3s ease; /* Оставляем переход, если он нужен для других целей, но основное смещение будет работать без него */
-  overflow-x: hidden; /* Скрываем горизонтальную прокрутку в основном контенте */
-}
-
-.main-content.shifted {
-  /* В этом случае, при использовании flexbox, нам может не понадобиться явно менять margin-left */
-  /* Если сайдбар фиксированный и занимает место, flex: 1 в main-content автоматически займет остальное */
-  /* margin-left: var(--sidebar-width-open); */
-  /* width: calc(100% - var(--sidebar-width-open)); */
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding-top: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+  width: 100%; /* Занимаем всю доступную ширину */
+  /* Удаляем margin-left и width calc, чтобы контент не смещался */
 }
 
 .container {
@@ -92,16 +87,14 @@ button:hover {
 
 /* Адаптивный дизайн */
 @media (max-width: 768px) {
-  .main-content {
-    padding: 1rem;
-  }
-
-  .page-content {
-    padding: 1rem;
-  }
+  /* Удаляем эти стили, так как main-content теперь всегда занимает 100% ширины */
+  /* .main-content { */
+  /*   margin-left: 0 !important; */
+  /*   width: 100% !important; */
+  /* } */
 }
 
-/* Корректируем стили боковой панели, чтобы она не влияла на flex-контейнер, если она фиксирована */
+/* Sidebar styles - remain fixed */
 .sidebar {
     width: var(--sidebar-width-open); /* Ширина боковой панели */
     background-color: #2c3e50;
@@ -123,14 +116,4 @@ button:hover {
 .sidebar.closed {
   width: var(--sidebar-width-closed); /* Узкая ширина в закрытом состоянии */
   align-items: center;
-}
-
-/* Добавляем отступ к основному контенту, чтобы он не перекрывался фиксированным сайдбаром */
-.app > main {
-    margin-left: var(--sidebar-width-open); /* Отступ равен ширине ОТКРЫТОГО сайдбара */
-    transition: margin-left 0.3s ease; /* Плавный переход отступа */
-}
-
-.app.sidebar-closed > main {
-    margin-left: var(--sidebar-width-closed); /* Отступ равен ширине ЗАКРЫТОГО сайдбара */
 } 

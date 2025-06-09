@@ -10,24 +10,28 @@ function GradesPage() {
   ];
 
   return (
-    <div className="container">
-      <div className="page-content">
-        <h2>Ваши оценки</h2>
-        <p>Текущая успеваемость по предметам</p>
+    <div className="container py-4">
+      <div className="page-content card">
+        <h2 className="mb-3">Ваши оценки</h2>
+        <p className="lead text-muted mb-4">Текущая успеваемость по предметам</p>
 
-        <div className="grades-table">
-          <table>
-            <thead>
+        <div className="grades-table table-responsive">
+          <table className="table table-striped table-hover">
+            <thead className="table-dark">
               <tr>
-                <th>Предмет</th>
-                <th>Оценка</th>
+                <th scope="col">Предмет</th>
+                <th scope="col">Оценка</th>
               </tr>
             </thead>
             <tbody>
               {gradesData.map(item => (
                 <tr key={item.id}>
                   <td>{item.subject}</td>
-                  <td className={`grade-${item.grade.toLowerCase()}`}>{item.grade}</td>
+                  <td>
+                    <span className={`badge rounded-pill grade-${item.grade.toLowerCase().replace('+', 'plus').replace('-', 'minus')}`}>
+                      {item.grade}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>

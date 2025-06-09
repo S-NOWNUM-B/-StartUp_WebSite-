@@ -13,48 +13,48 @@ function ProfilePage() {
     };
 
     return (
-        <div className="container">
-            <div className="page-content">
-                <h2>Личный профиль</h2>
-                <p>Ваша персональная информация</p>
+        <div className="container py-4">
+            <div className="page-content card">
+                <h2 className="mb-3">Личный профиль</h2>
+                <p className="lead text-muted mb-4">Ваша персональная информация</p>
 
                 <div className="profile-info">
-                    <div className="profile-section">
-                        <h3>Основная информация</h3>
-                        <div className="info-grid">
-                            <div className="info-item">
-                                <label>ФИО:</label>
-                                <span>{userData.name}</span>
+                    <div className="profile-section mb-4">
+                        <h3 className="h5 mb-3">Основная информация</h3>
+                        <div className="profile-details row g-3">
+                            <div className="col-md-6 detail-group">
+                                <label className="form-label">ФИО:</label>
+                                <p className="form-control-plaintext">{userData.name}</p>
                             </div>
-                            <div className="info-item">
-                                <label>Студенческий ID:</label>
-                                <span>{userData.studentId}</span>
+                            <div className="col-md-6 detail-group">
+                                <label className="form-label">Студенческий ID:</label>
+                                <p className="form-control-plaintext">{userData.studentId}</p>
                             </div>
-                            <div className="info-item">
-                                <label>Факультет:</label>
-                                <span>{userData.faculty}</span>
+                            <div className="col-md-6 detail-group">
+                                <label className="form-label">Факультет:</label>
+                                <p className="form-control-plaintext">{userData.faculty}</p>
                             </div>
-                            <div className="info-item">
-                                <label>Специализация:</label>
-                                <span>{userData.specialization}</span>
+                            <div className="col-md-6 detail-group">
+                                <label className="form-label">Специализация:</label>
+                                <p className="form-control-plaintext">{userData.specialization}</p>
                             </div>
-                            <div className="info-item">
-                                <label>Курс:</label>
-                                <span>{userData.year}</span>
+                            <div className="col-md-6 detail-group">
+                                <label className="form-label">Курс:</label>
+                                <p className="form-control-plaintext">{userData.year}</p>
                             </div>
                         </div>
                     </div>
 
                     <div className="profile-section">
-                        <h3>Контактная информация</h3>
-                        <div className="info-grid">
-                            <div className="info-item">
-                                <label>Email:</label>
-                                <span>{userData.email}</span>
+                        <h3 className="h5 mb-3">Контактная информация</h3>
+                        <div className="profile-details row g-3">
+                            <div className="col-md-6 detail-group">
+                                <label className="form-label">Email:</label>
+                                <p className="form-control-plaintext">{userData.email}</p>
                             </div>
-                            <div className="info-item">
-                                <label>Телефон:</label>
-                                <span>{userData.phone}</span>
+                            <div className="col-md-6 detail-group">
+                                <label className="form-label">Телефон:</label>
+                                <p className="form-control-plaintext">{userData.phone}</p>
                             </div>
                         </div>
                     </div>

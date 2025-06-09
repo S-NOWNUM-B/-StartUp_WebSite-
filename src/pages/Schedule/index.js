@@ -10,19 +10,19 @@ function SchedulePage() {
   ];
 
   return (
-    <div className="container">
-      <div className="page-content">
-        <h2>Расписание занятий</h2>
-        <p>Ваше расписание на текущую неделю</p>
+    <div className="container py-4">
+      <div className="page-content card">
+        <h2 className="mb-3">Расписание занятий</h2>
+        <p className="lead text-muted mb-4">Ваше расписание на текущую неделю</p>
 
-        <div className="schedule-table">
-          <table>
-            <thead>
+        <div className="schedule-table table-responsive">
+          <table className="table table-striped table-hover">
+            <thead className="table-dark">
               <tr>
-                <th>День</th>
-                <th>Время</th>
-                <th>Предмет</th>
-                <th>Аудитория</th>
+                <th scope="col">День</th>
+                <th scope="col">Время</th>
+                <th scope="col">Предмет</th>
+                <th scope="col">Аудитория</th>
               </tr>
             </thead>
             <tbody>
