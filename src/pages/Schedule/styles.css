@@ -1,41 +1,477 @@
-.schedule-list {
-  margin-top: var(--spacing-xl);
+/* Стили для страницы расписания */
+
+.schedule-item-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.schedule-item {
-  background: var(--white);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
-  padding: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-  display: flex;
-  gap: var(--spacing-md);
+.schedule-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }
 
-.schedule-time {
-  min-width: 120px;
-  font-weight: bold;
-  color: var(--secondary-color);
+.schedule-item-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.schedule-details h3 {
-  margin: 0 0 var(--spacing-xs) 0;
-  color: var(--primary-color);
+.schedule-item-card:hover::before {
+  opacity: 1;
 }
 
-.schedule-details p {
-  margin: 0;
-  color: var(--text-color-dark);
+/* Анимация для карточек дней */
+.card {
+  transition: all 0.3s ease;
 }
 
-/* Адаптивный дизайн */
+.card:hover {
+  transform: translateY(-1px);
+}
+
+/* Стили для значков типов занятий */
+.badge {
+  font-size: 0.75em;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  padding: 0.35em 0.65em;
+  line-height: 1.2;
+  white-space: nowrap;
+  border-radius: 0.375rem;
+}
+
+/* Специальные стили для бейджей в карточках расписания */
+.schedule-item-card .badge {
+  min-width: 90px;
+  height: 28px;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* Стили для статистических бейджей */
+.card-body .badge {
+  min-width: 70px;
+  font-size: 0.75em;
+  padding: 0.4em 0.7em;
+}
+
+/* Дополнительные стили для исправления выравнивания */
+.badge.d-flex {
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+/* Фиксированное выравнивание для различных типов */
+.badge.bg-primary,
+.badge.bg-success,
+.badge.bg-warning,
+.badge.bg-info,
+.badge.bg-danger,
+.badge.bg-secondary,
+.badge.bg-dark {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* Анимация для кнопок избранного */
+.btn-warning, .btn-outline-warning {
+  transition: all 0.3s ease;
+}
+
+.btn-warning:hover, .btn-outline-warning:hover {
+  transform: scale(1.1);
+}
+
+/* Стили для алертов с заданиями */
+.alert-light {
+  border-left: 4px solid #ffc107;
+  background: linear-gradient(90deg, #fff9c4 0%, #ffffff 100%);
+}
+
+.alert-info {
+  border-left: 4px solid #0dcaf0;
+  background: linear-gradient(90deg, #cff4fc 0%, #ffffff 100%);
+}
+
+/* Стили для статистики */
+.sticky-top .card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.border.rounded {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid #dee2e6 !important;
+}
+
+/* Адаптивные стили */
 @media (max-width: 768px) {
-  .schedule-item {
+  .schedule-item-card {
+    margin-bottom: 1rem;
+  }
+  
+  .sticky-top {
+    position: relative !important;
+    top: auto !important;
+  }
+  
+  .d-flex.justify-content-between {
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: 1rem;
   }
+  
+  .btn-group {
+    width: 100%;
+  }
+  
+  .btn-group .btn {
+    flex: 1;
+  }
+}
 
-  .schedule-time {
-    min-width: auto;
+/* Цветовые темы для типов занятий */
+.border-primary {
+  border-color: #0d6efd !important;
+}
+
+.border-success {
+  border-color: #198754 !important;
+}
+
+.border-warning {
+  border-color: #ffc107 !important;
+}
+
+.border-info {
+  border-color: #0dcaf0 !important;
+}
+
+.border-danger {
+  border-color: #dc3545 !important;
+}
+
+.border-secondary {
+  border-color: #6c757d !important;
+}
+
+.border-dark {
+  border-color: #212529 !important;
+}
+
+/* Анимация появления - упрощенная для стабильности */
+@keyframes fadeInUp {
+  from {
+    opacity: 0.8;
+    transform: translateY(5px);
   }
-} 
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.schedule-container .card {
+  opacity: 1;
+  /* Отключаем анимацию для предотвращения проблем с видимостью */
+  /* animation: fadeInUp 0.4s ease-out; */
+}
+
+/* Убираем задержки анимации */
+.schedule-container .card:nth-child(1),
+.schedule-container .card:nth-child(2),
+.schedule-container .card:nth-child(3),
+.schedule-container .card:nth-child(4),
+.schedule-container .card:nth-child(5),
+.schedule-container .card:nth-child(6),
+.schedule-container .card:nth-child(7) {
+  /* animation-delay: 0s; */
+}
+
+/* Пульсация для текущего дня - отключена для стабильности */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(13, 110, 253, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(13, 110, 253, 0);
+  }
+}
+
+.border-primary.shadow {
+  /* animation: pulse 2s infinite; - отключено */
+  box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15) !important;
+}
+
+/* Стили для уведомлений */
+.alert-dismissible .btn-close {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+}
+
+/* Градиенты для заголовков карточек */
+.bg-primary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%) !important;
+}
+
+.bg-info {
+  background: linear-gradient(135deg, #0dcaf0 0%, #31d2f2 100%) !important;
+}
+
+.bg-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ffca2c 100%) !important;
+}
+
+/* Эффект при загрузке - упрощенный */
+.schedule-item-card {
+  opacity: 1;
+  /* Отключаем анимацию для стабильности */
+  /* animation: fadeInCard 0.8s ease-out; */
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0.9;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover эффекты для кнопок */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Красивые иконки */
+.bi {
+  font-size: 1em;
+  vertical-align: baseline;
+}
+
+.display-6.bi {
+  color: #6c757d;
+  opacity: 0.5;
+}
+
+/* Стили для быстрых действий */
+.d-grid .btn {
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.d-grid .btn i {
+  width: 20px;
+}
+
+/* Кастомный scrollbar для мобильных устройств */
+.schedule-container {
+  scrollbar-width: thin;
+  scrollbar-color: #0d6efd #f8f9fa;
+}
+
+.schedule-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.schedule-container::-webkit-scrollbar-track {
+  background: #f8f9fa;
+  border-radius: 3px;
+}
+
+.schedule-container::-webkit-scrollbar-thumb {
+  background: #0d6efd;
+  border-radius: 3px;
+}
+
+.schedule-container::-webkit-scrollbar-thumb:hover {
+  background: #0b5ed7;
+}
+
+/* Стили для избранных занятий */
+.card-header.bg-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ffb700 100%) !important;
+}
+
+/* Интерактивные элементы */
+.form-control:focus,
+.form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Анимация загрузки для статистики */
+.border.rounded h4 {
+  animation: countUp 1s ease-out;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Стили для модального окна уведомлений */
+.modal {
+  z-index: 9999;
+}
+
+.modal-content {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #ffc107 0%, #ffb700 100%);
+  color: #212529;
+  border-radius: 12px 12px 0 0;
+  border-bottom: none;
+  padding: 1.5rem;
+}
+
+.modal-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.form-check {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.form-check:hover {
+  background-color: #f8f9fa;
+}
+
+.form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.form-switch .form-check-input {
+  width: 3em;
+  height: 1.5em;
+}
+
+.form-switch .form-check-input:checked {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+.form-select {
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  transition: border-color 0.3s ease;
+}
+
+.form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.alert-info {
+  background: linear-gradient(135deg, #cff4fc 0%, #e7f1ff 100%);
+  border: 1px solid #b3d9ff;
+  border-radius: 8px;
+  color: #055160;
+}
+
+.modal-footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #e9ecef;
+  border-radius: 0 0 12px 12px;
+}
+
+.modal-footer .btn {
+  min-width: 120px;
+}
+
+/* Анимация для модального окна */
+.modal.show {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-dialog {
+  animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Стили для toast уведомлений */
+.alert.position-fixed {
+  animation: slideInRight 0.3s ease-out;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

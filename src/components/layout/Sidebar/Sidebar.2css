@@ -1,0 +1,8 @@
+:root {
+    --sidebar-width-open: 300px;
+    --sidebar-width-closed: 120px;
+}
+
+.sidebar {
+// ... existing code ...
+} 

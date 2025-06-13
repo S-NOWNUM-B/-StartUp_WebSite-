@@ -78,7 +78,7 @@
   width: 16px;
   left: 4px;
   bottom: 4px;
-  background-color: var(--white);
+  background-color: var(--text-color-light);
   transition: .4s;
   border-radius: 50%;
 }
@@ -170,4 +170,9 @@ input:checked + .slider:before {
   .reset-button {
     width: 100%;
   }
+}
+
+button, .btn, .settings-section, .settings-card, .settings-tab, .settings-tab-btn {
+  background: white;
+  color: var(--text-color-dark);
 } 

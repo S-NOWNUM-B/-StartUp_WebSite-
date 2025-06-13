@@ -6,7 +6,7 @@ function Navigation() {
   return (
     <nav className="main-nav">
       <div className="nav-brand">
-        <h1>AlmaU Hub</h1>
+        <h1>EduSpace</h1>
       </div>
       <ul className="nav-links">
         <li>
@@ -20,9 +20,6 @@ function Navigation() {
         </li>
         <li>
           <NavLink to="/news">Новости</NavLink>
-        </li>
-        <li>
-          <NavLink to="/tasks">Задачи</NavLink>
         </li>
         <li>
           <NavLink to="/profile">Профиль</NavLink>

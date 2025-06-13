@@ -20,7 +20,7 @@ th, td {
 
 th {
   background-color: var(--primary-color);
-  color: var(--white);
+  color: var(--text-color-light);
   font-weight: 500;
 }
 
@@ -48,4 +48,9 @@ tr:last-child td {
   th, td {
     padding: var(--spacing-sm);
   }
+}
+
+button, .btn, .grades-section, .grades-card, .grades-tab, .grades-tab-btn {
+  background: white;
+  color: var(--text-color-dark);
 } 
