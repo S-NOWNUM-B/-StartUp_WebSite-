@@ -1,0 +1,439 @@
+/* ========== АДАПТИВНЫЕ ПЕРЕМЕННЫЕ ========== */
+
+/* Tablet */
+@media (max-width: 768px) {
+  :root {
+    --font-size-base: 0.9rem;
+    --font-size-lg: 1rem;
+    --font-size-xl: 1.1rem;
+    --font-size-2xl: 1.3rem;
+    --font-size-3xl: 1.6rem;
+    --font-size-4xl: 2rem;
+    
+    --spacing-4: 0.875rem;
+    --spacing-6: 1.25rem;
+    --spacing-8: 1.5rem;
+    --spacing-10: 2rem;
+    --spacing-12: 2.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  :root {
+    --font-size-base: 0.85rem;
+    --font-size-lg: 0.95rem;
+    --font-size-xl: 1rem;
+    --font-size-2xl: 1.2rem;
+    --font-size-3xl: 1.4rem;
+    --font-size-4xl: 1.8rem;
+    
+    --spacing-4: 0.75rem;
+    --spacing-6: 1rem;
+    --spacing-8: 1.25rem;
+    --spacing-10: 1.5rem;
+    --spacing-12: 2rem;
+  }
+}
+
+/**
+ * CSS Variables for CampusHub
+ * Центральное управление дизайн-системой - University Theme
+ */
+
+:root {
+  /* ===== ЦВЕТОВАЯ ПАЛИТРА ===== */
+  
+  /* Основные цвета - Golden Yellow Theme */
+  --primary-50: #fffbeb;
+  --primary-100: #fef3c7;
+  --primary-200: #fde68a;
+  --primary-300: #fcd34d;
+  --primary-400: #fbbf24;
+  --primary-500: #f59e0b;
+  --primary-600: #d97706;
+  --primary-700: #b45309;
+  --primary-800: #92400e;
+  --primary-900: #78350f;
+
+  /* Темная палитра - Slate Gray */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  /* Дополнительные цвета */
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --orange-500: #f97316;
+  --orange-600: #ea580c;
+
+  /* ===== СЕМАНТИЧЕСКИЕ ЦВЕТА ===== */
+  
+  /* Основные */
+  --color-primary: var(--primary-400);
+  --color-primary-dark: var(--primary-600);
+  --color-primary-light: var(--primary-300);
+  --color-primary-hover: var(--primary-500);
+
+  /* Фон */
+  --bg-primary: var(--slate-900);
+  --bg-secondary: var(--slate-800);
+  --bg-tertiary: var(--slate-700);
+  --bg-quaternary: var(--slate-600);
+
+  /* Текст */
+  --text-primary: var(--slate-100);
+  --text-secondary: var(--slate-300);
+  --text-tertiary: var(--slate-400);
+  --text-muted: var(--slate-500);
+
+  /* Границы */
+  --border-primary: var(--slate-600);
+  --border-secondary: var(--slate-700);
+  --border-accent: var(--primary-400);
+
+  /* Состояния */
+  --color-success: var(--green-500);
+  --color-success-dark: var(--green-600);
+  --color-danger: var(--red-500);
+  --color-danger-dark: var(--red-600);
+  --color-warning: var(--orange-500);
+  --color-warning-dark: var(--orange-600);
+  --color-info: var(--blue-500);
+  --color-info-dark: var(--blue-600);
+
+  /* ===== ГРАДИЕНТЫ ===== */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  --gradient-background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+  --gradient-card: linear-gradient(145deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  --gradient-hero: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 50%, var(--slate-700) 100%);
+  
+  --gradient-success: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-dark) 100%);
+  --gradient-danger: linear-gradient(135deg, var(--color-danger) 0%, var(--color-danger-dark) 100%);
+  --gradient-warning: linear-gradient(135deg, var(--color-warning) 0%, var(--color-warning-dark) 100%);
+  --gradient-info: linear-gradient(135deg, var(--color-info) 0%, var(--color-info-dark) 100%);
+
+  /* ===== ТЕНИ ===== */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+
+  /* Специальные тени */
+  --shadow-glow: 0 0 20px rgba(251, 191, 36, 0.3);
+  --shadow-glow-strong: 0 0 40px rgba(251, 191, 36, 0.5);
+  --shadow-dark-intense: 0 20px 40px rgba(0, 0, 0, 0.8);
+  --shadow-card-hover: 0 32px 64px rgba(0, 0, 0, 0.7);
+
+  /* ===== РАДИУСЫ ГРАНИЦ ===== */
+  --radius-none: 0;
+  --radius-sm: 0.125rem;
+  --radius-base: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ===== РАЗМЕРЫ И ОТСТУПЫ ===== */
+  --space-px: 1px;
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+  --space-48: 12rem;
+  --space-56: 14rem;
+  --space-64: 16rem;
+
+  /* ===== АНИМАЦИИ И ПЕРЕХОДЫ ===== */
+  --duration-75: 75ms;
+  --duration-100: 100ms;
+  --duration-150: 150ms;
+  --duration-200: 200ms;
+  --duration-300: 300ms;
+  --duration-500: 500ms;
+  --duration-700: 700ms;
+  --duration-1000: 1000ms;
+
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Готовые переходы */
+  --transition-fast: var(--duration-150) var(--ease-out);
+  --transition-normal: var(--duration-300) var(--ease-in-out);
+  --transition-slow: var(--duration-500) var(--ease-in-out);
+  --transition-bounce: var(--duration-700) var(--ease-bounce);
+  --transition-back: var(--duration-500) var(--ease-back);
+
+  /* ===== ТИПОГРАФИКА ===== */
+  
+  /* Семейство шрифтов */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-mono: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* Размеры шрифтов */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+  --text-6xl: 3.75rem;    /* 60px */
+  --text-7xl: 4.5rem;     /* 72px */
+  --text-8xl: 6rem;       /* 96px */
+  --text-9xl: 8rem;       /* 128px */
+
+  /* Веса шрифтов */
+  --font-thin: 100;
+  --font-extralight: 200;
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+  --font-black: 900;
+
+  /* Высота строк */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* Межбуквенное расстояние */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* ===== Z-INDEX СЛОИ ===== */
+  --z-auto: auto;
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-50: 50;
+  --z-dropdown: 1000;
+  --z-sticky: 1010;
+  --z-fixed: 1020;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-top: 1080;
+
+  /* ===== БРЕЙКПОИНТЫ (для справки) ===== */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ===== СПЕЦИАЛЬНЫЕ ЭФФЕКТЫ ===== */
+  
+  /* Размытие */
+  --blur-none: 0;
+  --blur-sm: 4px;
+  --blur-base: 8px;
+  --blur-md: 12px;
+  --blur-lg: 16px;
+  --blur-xl: 24px;
+  --blur-2xl: 40px;
+  --blur-3xl: 64px;
+
+  /* Насыщенность */
+  --saturate-0: 0;
+  --saturate-50: 0.5;
+  --saturate-100: 1;
+  --saturate-150: 1.5;
+  --saturate-200: 2;
+
+  /* Яркость */
+  --brightness-0: 0;
+  --brightness-50: 0.5;
+  --brightness-75: 0.75;
+  --brightness-90: 0.9;
+  --brightness-95: 0.95;
+  --brightness-100: 1;
+  --brightness-105: 1.05;
+  --brightness-110: 1.1;
+  --brightness-125: 1.25;
+  --brightness-150: 1.5;
+  --brightness-200: 2;
+
+  /* Контрастность */
+  --contrast-0: 0;
+  --contrast-50: 0.5;
+  --contrast-75: 0.75;
+  --contrast-100: 1;
+  --contrast-125: 1.25;
+  --contrast-150: 1.5;
+  --contrast-200: 2;
+
+  /* ===== КАСТОМНЫЕ СВОЙСТВА КОМПОНЕНТОВ ===== */
+  
+  /* Навигация */
+  --nav-height: 4rem;
+  --nav-padding: var(--space-4);
+  --nav-bg: var(--bg-secondary);
+  --nav-border: var(--border-primary);
+
+  /* Сайдбар */
+  --sidebar-width: 16rem;
+  --sidebar-bg: var(--bg-secondary);
+  --sidebar-border: var(--border-primary);
+
+  /* Карточки */
+  --card-padding: var(--space-6);
+  --card-bg: var(--gradient-card);
+  --card-border: var(--border-primary);
+  --card-radius: var(--radius-2xl);
+  --card-shadow: var(--shadow-xl);
+
+  /* Кнопки */
+  --btn-padding-x: var(--space-6);
+  --btn-padding-y: var(--space-3);
+  --btn-radius: var(--radius-lg);
+  --btn-font-weight: var(--font-semibold);
+  --btn-transition: var(--transition-normal);
+
+  /* Формы */
+  --input-padding-x: var(--space-4);
+  --input-padding-y: var(--space-3);
+  --input-bg: var(--bg-tertiary);
+  --input-border: var(--border-primary);
+  --input-radius: var(--radius-lg);
+  --input-focus-border: var(--border-accent);
+  --input-focus-shadow: var(--shadow-glow);
+
+  /* Модальные окна */
+  --modal-bg: var(--bg-secondary);
+  --modal-border: var(--border-primary);
+  --modal-radius: var(--radius-2xl);
+  --modal-shadow: var(--shadow-2xl);
+  --modal-backdrop: rgba(15, 23, 42, 0.8);
+
+  /* Tooltip */
+  --tooltip-bg: var(--bg-primary);
+  --tooltip-color: var(--text-primary);
+  --tooltip-radius: var(--radius-md);
+  --tooltip-shadow: var(--shadow-lg);
+  --tooltip-arrow-size: 0.5rem;
+}
+
+/* ===== ТЕМНАЯ ТЕМА (по умолчанию) ===== */
+[data-theme="dark"] {
+  /* Переопределения для явного указания темной темы */
+  --bg-primary: var(--slate-900);
+  --bg-secondary: var(--slate-800);
+  --bg-tertiary: var(--slate-700);
+  --text-primary: var(--slate-100);
+  --text-secondary: var(--slate-300);
+}
+
+/* ===== СВЕТЛАЯ ТЕМА (опционально) ===== */
+[data-theme="light"] {
+  --bg-primary: var(--slate-50);
+  --bg-secondary: var(--slate-100);
+  --bg-tertiary: var(--slate-200);
+  --text-primary: var(--slate-900);
+  --text-secondary: var(--slate-700);
+  --border-primary: var(--slate-300);
+  --border-secondary: var(--slate-400);
+}
+
+/* ===== МЕДИА-ЗАПРОСЫ ДЛЯ АДАПТИВНОСТИ ===== */
+
+/* Уменьшенные размеры для мобильных */
+@media (max-width: 768px) {
+  :root {
+    --text-3xl: 1.5rem;     /* Уменьшено с 1.875rem */
+    --text-4xl: 1.875rem;   /* Уменьшено с 2.25rem */
+    --text-5xl: 2.25rem;    /* Уменьшено с 3rem */
+    --text-6xl: 2.75rem;    /* Уменьшено с 3.75rem */
+    
+    --space-4: 0.75rem;     /* Уменьшено с 1rem */
+    --space-6: 1.25rem;     /* Уменьшено с 1.5rem */
+    --space-8: 1.5rem;      /* Уменьшено с 2rem */
+    
+    --card-padding: var(--space-4);
+    --btn-padding-x: var(--space-4);
+    --btn-padding-y: var(--space-2);
+  }
+}
+
+/* Еще более уменьшенные размеры для очень маленьких экранов */
+@media (max-width: 480px) {
+  :root {
+    --text-2xl: 1.25rem;    /* Уменьшено с 1.5rem */
+    --text-3xl: 1.375rem;   /* Уменьшено с 1.5rem */
+    --text-4xl: 1.625rem;   /* Уменьшено с 1.875rem */
+    --text-5xl: 1.875rem;   /* Уменьшено с 2.25rem */
+    
+    --space-3: 0.5rem;      /* Уменьшено с 0.75rem */
+    --space-4: 0.625rem;    /* Уменьшено с 0.75rem */
+    --space-6: 1rem;        /* Уменьшено с 1.25rem */
+    
+    --card-padding: var(--space-3);
+  }
+}
+
+/* ===== ВЫСОКОКОНТРАСТНЫЙ РЕЖИМ ===== */
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
+    --border-primary: #cbd5e1;
+    --color-primary: #fcd34d;
+  }
+}
+
+/* ===== УМЕНЬШЕННОЕ ДВИЖЕНИЕ ===== */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: none;
+    --transition-normal: none;
+    --transition-slow: none;
+    --transition-bounce: none;
+    --transition-back: none;
+  }
+} 
