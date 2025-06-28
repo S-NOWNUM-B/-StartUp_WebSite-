@@ -1,44 +1,43 @@
 {
-  "name": "campushub",
+  "name": "website_next",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@popperjs/core": "^2.11.8",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "bootstrap": "^5.3.6",
-    "bootstrap-icons": "^1.13.1",
-    "react": "^18.2.0",
-
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.3",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-dropdown-menu": "^2.1.15",
+    "@radix-ui/react-select": "^2.2.5",
+    "@radix-ui/react-tooltip": "^1.2.7",
+    "@use-gesture/react": "^10.3.1",
+    "bootstrap": "^5.3.7",
+    "bootstrap-icons": "^1.13.1",
+    "framer-motion": "^12.19.1",
+    "lucide-react": "^0.523.0",
+    "next": "15.3.4",
+    "react": "^19.0.0",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.58.1",
+    "react-hot-toast": "^2.5.2",
+    "react-intersection-observer": "^9.16.0",
+    "react-spring": "^10.0.1",
+    "recharts": "^3.0.0",
+    "zustand": "^5.0.5"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
