@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { useScheduleData } from '../hooks/useScheduleData';
 // import { toast } from 'react-hot-toast'; // Убран импорт, так как все toast уведомления отключены
 import { 
   BookOpen, 
@@ -156,8 +158,12 @@ interface WeeklyModalData {
 }
 
 export default function StudentDashboardModern() {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  
+  // Получаем реальные данные расписания
+  const { getTodayEvents, getTodayTasks } = useScheduleData(currentTime);
   const [newNote, setNewNote] = useState('');
   const [showNoteForm, setShowNoteForm] = useState(false);
   // Убраны состояния для создания задач - теперь задачи берутся из расписания
@@ -178,8 +184,12 @@ export default function StudentDashboardModern() {
 
   useEffect(() => {
     setMounted(true);
+    setCurrentTime(new Date());
+    
     const timer = setInterval(() => setCurrentTime(new Date()), 60000); // Update every minute
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
   // Обработка клавиши Escape для закрытия модальных окон
@@ -209,11 +219,39 @@ export default function StudentDashboardModern() {
 
 
 
-  const [quickNotes, setQuickNotes] = useState<QuickNote[]>([
-    { id: '1', text: 'Подготовиться к экзамену по математике', createdAt: new Date(), important: true },
-    { id: '2', text: 'Сдать курсовую работу до пятницы', createdAt: new Date(), important: false },
-    { id: '3', text: 'Встреча с научным руководителем в 14:00', createdAt: new Date(), important: true }
-  ]);
+  const [quickNotes, setQuickNotes] = useState<QuickNote[]>([]);
+
+  // Загрузка заметок из localStorage при монтировании
+  useEffect(() => {
+    try {
+      const savedNotes = localStorage.getItem('quickNotes');
+      if (savedNotes) {
+        const parsedNotes = JSON.parse(savedNotes).map((note: any) => ({
+          ...note,
+          createdAt: new Date(note.createdAt)
+        }));
+        setQuickNotes(parsedNotes);
+      } else {
+        // Устанавливаем дефолтные заметки только если нет сохраненных
+        const defaultNotes = [
+          { id: '1', text: 'Подготовиться к экзамену по математике', createdAt: new Date(), important: true },
+          { id: '2', text: 'Сдать курсовую работу до пятницы', createdAt: new Date(), important: false },
+          { id: '3', text: 'Встреча с научным руководителем в 14:00', createdAt: new Date(), important: true }
+        ];
+        setQuickNotes(defaultNotes);
+        localStorage.setItem('quickNotes', JSON.stringify(defaultNotes));
+      }
+    } catch (error) {
+      console.error('Ошибка при загрузке заметок:', error);
+      // Устанавливаем дефолтные заметки при ошибке
+      const defaultNotes = [
+        { id: '1', text: 'Подготовиться к экзамену по математике', createdAt: new Date(), important: true },
+        { id: '2', text: 'Сдать курсовую работу до пятницы', createdAt: new Date(), important: false },
+        { id: '3', text: 'Встреча с научным руководителем в 14:00', createdAt: new Date(), important: true }
+      ];
+      setQuickNotes(defaultNotes);
+    }
+  }, []);
 
   const [tasks, setTasks] = useState<Task[]>([
     { id: '1', title: 'Решить задачи по алгебре', subject: 'Математика', deadline: new Date(2024, 11, 25), priority: 'high', completed: false, progress: 60 },
@@ -230,70 +268,29 @@ export default function StudentDashboardModern() {
     { id: '5', subject: 'Английский', grade: 4, maxGrade: 5, weight: 2, date: new Date(), type: 'Тест' }
   ];
 
-  // Создаем недельное расписание на основе дня недели
-  const weeklySchedule = useMemo(() => {
-    const scheduleByDay = {
-      0: [ // Воскресенье - выходной
-        { id: 'sun-1', title: 'Самоподготовка', time: '10:00', type: 'deadline' as const, subject: 'Общее', progress: 70 },
-        { id: 'sun-2', title: 'Повторение материала', time: '14:00', type: 'deadline' as const, subject: 'Математика', progress: 30 }
-      ],
-      1: [ // Понедельник
-        { id: 'mon-1', title: 'Математический анализ', time: '09:00', type: 'lesson' as const, subject: 'Математика', progress: 85 },
-        { id: 'mon-2', title: 'Программирование (лекция)', time: '10:45', type: 'lesson' as const, subject: 'Программирование', progress: 60 },
-        { id: 'mon-3', title: 'Сдать лабораторную №3', time: '14:30', type: 'deadline' as const, subject: 'Программирование', progress: 45 },
-        { id: 'mon-4', title: 'Подготовка к семинару', time: '16:00', type: 'deadline' as const, subject: 'История', progress: 20 }
-      ],
-      2: [ // Вторник
-        { id: 'tue-1', title: 'Физика (лекция)', time: '09:00', type: 'lesson' as const, subject: 'Физика', progress: 90 },
-        { id: 'tue-2', title: 'Английский язык', time: '10:45', type: 'lesson' as const, subject: 'Английский', progress: 75 },
-        { id: 'tue-3', title: 'Выполнить ДЗ по физике', time: '15:00', type: 'deadline' as const, subject: 'Физика', progress: 30 },
-        { id: 'tue-4', title: 'Эссе по истории', time: '18:00', type: 'deadline' as const, subject: 'История', progress: 65 }
-      ],
-      3: [ // Среда
-        { id: 'wed-1', title: 'Программирование (практика)', time: '09:00', type: 'lesson' as const, subject: 'Программирование', progress: 40 },
-        { id: 'wed-2', title: 'История (семинар)', time: '11:30', type: 'lesson' as const, subject: 'История', progress: 80 },
-        { id: 'wed-3', title: 'Проект по программированию', time: '14:00', type: 'deadline' as const, subject: 'Программирование', progress: 55 },
-        { id: 'wed-4', title: 'Подготовка презентации', time: '16:30', type: 'deadline' as const, subject: 'Общее', progress: 25 }
-      ],
-      4: [ // Четверг
-        { id: 'thu-1', title: 'Математика (семинар)', time: '09:00', type: 'lesson' as const, subject: 'Математика', progress: 70 },
-        { id: 'thu-2', title: 'Физика (лабораторная)', time: '11:00', type: 'lesson' as const, subject: 'Физика', progress: 85 },
-        { id: 'thu-3', title: 'Решить задачи по математике', time: '15:00', type: 'deadline' as const, subject: 'Математика', progress: 60 },
-        { id: 'thu-4', title: 'Подготовка к экзамену', time: '19:00', type: 'exam' as const, subject: 'Физика', progress: 35 }
-      ],
-      5: [ // Пятница
-        { id: 'fri-1', title: 'Английский (разговорная практика)', time: '09:00', type: 'lesson' as const, subject: 'Английский', progress: 95 },
-        { id: 'fri-2', title: 'Курсовая работа', time: '11:00', type: 'deadline' as const, subject: 'Программирование', progress: 80 },
-        { id: 'fri-3', title: 'Встреча с научным руководителем', time: '14:00', type: 'meeting' as const, subject: 'Общее', progress: 0 },
-        { id: 'fri-4', title: 'Групповой проект', time: '16:00', type: 'deadline' as const, subject: 'История', progress: 50 }
-      ],
-      6: [ // Суббота - облегченный день
-        { id: 'sat-1', title: 'Консультация по математике', time: '10:00', type: 'meeting' as const, subject: 'Математика', progress: 0 },
-        { id: 'sat-2', title: 'Доработка проектов', time: '12:00', type: 'deadline' as const, subject: 'Программирование', progress: 40 },
-        { id: 'sat-3', title: 'Подготовка к неделе', time: '15:00', type: 'deadline' as const, subject: 'Общее', progress: 75 }
-      ]
-    };
-    
-    return scheduleByDay;
-  }, []);
 
-  // Получаем задачи для текущего дня недели
+
+  // Используем реальные данные из расписания
   const todayScheduleTasks = useMemo(() => {
-    const today = new Date().getDay();
-    return weeklySchedule[today as keyof typeof weeklySchedule] || [];
-  }, [weeklySchedule]);
+    if (!mounted) return [];
+    return getTodayTasks;
+  }, [getTodayTasks, mounted]);
 
-  const todayEvents: CalendarEvent[] = useMemo(() => 
-    todayScheduleTasks
-      .filter(task => task.type === 'lesson' || task.type === 'exam' || task.type === 'meeting')
-      .map(task => ({
-        id: task.id,
-        title: task.title,
+  const todayEvents: CalendarEvent[] = useMemo(() => {
+    if (!mounted || !getTodayEvents.length) return [];
+    
+    return getTodayEvents
+      .map((event, index) => ({
+        id: event.id,
+        title: event.title,
         date: new Date(),
-        time: task.time,
-        type: task.type,
-        location: task.type === 'lesson' ? `Ауд. ${Math.floor(Math.random() * 500) + 100}` : undefined
-      })), [todayScheduleTasks]);
+        time: event.time,
+        type: event.type === 'lecture' ? 'lesson' as const : 
+              event.type === 'exam' ? 'exam' as const : 
+              event.type === 'consultation' ? 'meeting' as const : 'lesson' as const,
+        location: event.room
+      }));
+  }, [getTodayEvents, mounted]);
 
   const gpaCalculation = useMemo(() => {
     const totalPoints = grades.reduce((sum, grade) => sum + (grade.grade * grade.weight), 0);
@@ -314,7 +311,7 @@ export default function StudentDashboardModern() {
       t.deadline.toDateString() === new Date().toDateString()
     );
     const avgProgress = pending.length > 0 
-      ? pending.reduce((sum, t) => sum + t.progress, 0) / pending.length 
+      ? (pending.length > 0 ? pending.reduce((sum, t) => sum + t.progress, 0) / pending.length : 0) 
       : 0;
 
     return {
@@ -326,6 +323,8 @@ export default function StudentDashboardModern() {
   }, [tasks]);
 
   const weeklyStats = useMemo(() => {
+    if (!mounted) return [];
+    
     const days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
     const fullDays = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
     const today = new Date().getDay();
@@ -380,7 +379,7 @@ export default function StudentDashboardModern() {
         mood: efficiency >= 80 ? 'отлично' : efficiency >= 60 ? 'хорошо' : efficiency >= 40 ? 'средне' : 'плохо'
       };
     });
-  }, []);
+  }, [mounted]);
 
 
 
@@ -393,37 +392,59 @@ export default function StudentDashboardModern() {
   };
 
   const addQuickNote = () => {
-    if (newNote.trim()) {
+    try {
+      if (!newNote.trim()) return;
+      
       const note: QuickNote = {
         id: Date.now().toString(),
         text: newNote.trim(),
         createdAt: new Date(),
         important: false
       };
-      setQuickNotes([note, ...quickNotes]);
+      const updatedNotes = [note, ...quickNotes];
+      setQuickNotes(updatedNotes);
+      localStorage.setItem('quickNotes', JSON.stringify(updatedNotes));
       setNewNote('');
       setShowNoteForm(false);
-      // toast.success('Заметка добавлена'); // Убрано раздражающее уведомление
+    } catch (error) {
+      console.error('Ошибка при добавлении заметки:', error);
     }
   };
 
   const deleteNote = (id: string) => {
-    setQuickNotes(quickNotes.filter(note => note.id !== id));
-    // toast.success('Заметка удалена'); // Убрано раздражающее уведомление
+    try {
+      if (!id) return;
+      const updatedNotes = quickNotes.filter(note => note.id !== id);
+      setQuickNotes(updatedNotes);
+      localStorage.setItem('quickNotes', JSON.stringify(updatedNotes));
+    } catch (error) {
+      console.error('Ошибка при удалении заметки:', error);
+    }
   };
 
   const toggleNoteImportant = (id: string) => {
-    setQuickNotes(quickNotes.map(note => 
-      note.id === id ? { ...note, important: !note.important } : note
-    ));
+    try {
+      const updatedNotes = quickNotes.map(note => 
+        note.id === id ? { ...note, important: !note.important } : note
+      );
+      setQuickNotes(updatedNotes);
+      localStorage.setItem('quickNotes', JSON.stringify(updatedNotes));
+    } catch (error) {
+      console.error('Ошибка при изменении статуса заметки:', error);
+    }
   };
 
   // Функция создания задач удалена - теперь задачи берутся из расписания
 
   const toggleTaskCompleted = (id: string) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { ...task, completed: !task.completed, progress: task.completed ? 0 : 100 } : task
-    ));
+    try {
+      if (!id) return;
+      setTasks(tasks.map(task => 
+        task.id === id ? { ...task, completed: !task.completed, progress: task.completed ? 0 : 100 } : task
+      ));
+    } catch (error) {
+      console.error('Ошибка при изменении статуса задачи:', error);
+    }
   };
 
   const getTimeGreeting = () => {
@@ -538,7 +559,7 @@ export default function StudentDashboardModern() {
     const creditProgress = Math.round((currentCredits / totalCreditsNeeded) * 100);
     
     const averageGrade = grades.length > 0 
-      ? grades.reduce((sum, grade) => sum + grade.grade, 0) / grades.length 
+              ? (grades.length > 0 ? grades.reduce((sum, grade) => sum + grade.grade, 0) / grades.length : 0) 
       : 0;
     
     const semesterGoal = 30; // Кредитов за семестр
@@ -676,15 +697,26 @@ export default function StudentDashboardModern() {
   const currentWidget = headerWidgets[widgetIndex];
 
   const cycleWidget = () => {
-    setWidgetIndex((prev) => (prev + 1) % headerWidgets.length);
-    // toast.success(`Переключено на: ${headerWidgets[(widgetIndex + 1) % headerWidgets.length].label}`); // Убрано раздражающее уведомление
+    try {
+      if (headerWidgets.length === 0) return;
+      setWidgetIndex((prev) => (prev + 1) % headerWidgets.length);
+    } catch (error) {
+      console.error('Ошибка при переключении виджета:', error);
+    }
   };
 
   const handleDayClick = (day: string) => {
-    setSelectedDay(day);
-    setShowDayDetail(true);
-    const dayData = weeklyStats.find(d => d.day === day);
-    // toast.success(`Открыта детальная информация за ${dayData?.fullDay}`); // Убрано раздражающее уведомление
+    try {
+      if (!day || weeklyStats.length === 0) return;
+      
+      const dayData = weeklyStats.find(d => d.day === day);
+      if (!dayData) return;
+      
+      setSelectedDay(day);
+      setShowDayDetail(true);
+    } catch (error) {
+      console.error('Ошибка при открытии деталей дня:', error);
+    }
   };
 
   const closeDayDetail = () => {
@@ -700,11 +732,22 @@ export default function StudentDashboardModern() {
   };
 
   const weeklyOverview = useMemo(() => {
+    if (!weeklyStats.length) {
+      return {
+        totalCompleted: 0,
+        totalTasks: 0,
+        avgEfficiency: 0,
+        bestDay: { day: 'ПН', efficiency: 0, fullDay: 'Понедельник', completed: 0, total: 0, active: false, isPast: false, isFuture: false, tasks: [], streak: 0, mood: 'хорошо' },
+        completedDays: 0,
+        trend: 'stable' as const
+      };
+    }
+
     const totalCompleted = weeklyStats.reduce((sum, day) => sum + day.completed, 0);
     const totalTasks = weeklyStats.reduce((sum, day) => sum + day.total, 0);
-    const avgEfficiency = Math.round((totalCompleted / totalTasks) * 100);
+    const avgEfficiency = totalTasks > 0 ? Math.round((totalCompleted / totalTasks) * 100) : 0;
     const bestDay = weeklyStats.reduce((best, day) => 
-      day.efficiency > best.efficiency ? day : best
+      day.efficiency > best.efficiency ? day : best, weeklyStats[0]
     );
     const completedDays = weeklyStats.filter(day => day.isPast && day.efficiency >= 60).length;
 
@@ -765,12 +808,12 @@ export default function StudentDashboardModern() {
         label: 'задач',
         sublabel: `Из ${weeklyOverview.totalTasks} всего`,
         trend: weeklyOverview.totalCompleted >= weeklyOverview.totalTasks * 0.7 ? 'up' : 'stable',
-        trendValue: `${Math.round((weeklyOverview.totalCompleted / weeklyOverview.totalTasks) * 100)}% выполнение`,
+        trendValue: `${weeklyOverview.totalTasks > 0 ? Math.round((weeklyOverview.totalCompleted / weeklyOverview.totalTasks) * 100) : 0}% выполнение`,
         color: '#3b82f6',
         gradientFrom: '#3b82f6',
         gradientTo: '#1d4ed8',
         icon: <CheckCircle className="w-5 h-5" />,
-        progress: Math.round((weeklyOverview.totalCompleted / weeklyOverview.totalTasks) * 100),
+        progress: weeklyOverview.totalTasks > 0 ? Math.round((weeklyOverview.totalCompleted / weeklyOverview.totalTasks) * 100) : 0,
         comparison: {
           label: 'За неделю',
           value: `${weeklyOverview.totalCompleted} выполнено`,
@@ -1288,13 +1331,28 @@ export default function StudentDashboardModern() {
 
                 {/* Задачи из расписания */}
                 <div className="task-management-section">
-                  <div className="section-header">
-                    <h4>Задачи из расписания</h4>
-                    <span className="task-count-badge">{todayScheduleTasks.length}</span>
-                  </div>
+                                  <div className="section-header">
+                  <h4>Задачи из расписания</h4>
+                </div>
 
                   <div className="compact-tasks-list">
-                    {todayScheduleTasks.slice(0, 4).map((task, index) => {
+                    {todayScheduleTasks.length === 0 ? (
+                      <motion.div 
+                        className="empty-state-card"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <div className="empty-state-icon">
+                          <Calendar className="w-8 h-8" />
+                        </div>
+                        <div className="empty-state-content">
+                          <h5>На сегодня нет дел</h5>
+                          <p>Отличный день для отдыха или планирования!</p>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      todayScheduleTasks.slice(0, 4).map((task, index) => {
                       const isCompleted = task.progress >= 100;
                       const taskTypeGradient = task.type === 'lesson' ? 'rgba(59, 130, 246, 0.15)' : 
                                              task.type === 'exam' ? 'rgba(239, 68, 68, 0.15)' : 
@@ -1353,7 +1411,7 @@ export default function StudentDashboardModern() {
                           </div>
                         </motion.div>
                       );
-                    })}
+                    }))}
                   </div>
                 </div>
               </div>
@@ -1364,11 +1422,26 @@ export default function StudentDashboardModern() {
                 <div className="schedule-events-section">
                   <div className="section-header">
                     <h4>Сегодня в расписании</h4>
-                    <span className="event-count-badge">{todayEvents.length}</span>
                   </div>
 
                   <div className="compact-events-list">
-                    {todayEvents.map((event) => (
+                    {todayEvents.length === 0 ? (
+                      <motion.div 
+                        className="empty-state-card"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                      >
+                        <div className="empty-state-icon">
+                          <Clock className="w-8 h-8" />
+                        </div>
+                        <div className="empty-state-content">
+                          <h5>Сегодня свободный день</h5>
+                          <p>Нет запланированных занятий</p>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      todayEvents.map((event) => (
                       <motion.div 
                         key={event.id} 
                         className="compact-event-item"
@@ -1406,7 +1479,7 @@ export default function StudentDashboardModern() {
                         </div>
                         <ChevronRight className="w-4 h-4 event-arrow" />
                       </motion.div>
-                    ))}
+                    )))}
                   </div>
                 </div>
 
@@ -1426,14 +1499,18 @@ export default function StudentDashboardModern() {
                         <CheckCircle className="w-4 h-4" />
                       </div>
                       <div className="stat-content">
-                        <div className="stat-value">{todayScheduleTasks.filter(t => t.progress >= 100).length}/{todayScheduleTasks.length}</div>
+                        <div className="stat-value">
+                          {todayScheduleTasks.filter(t => t.progress >= 100).length}/{todayScheduleTasks.length || 1}
+                        </div>
                         <div className="stat-label">Задач выполнено</div>
                         <div className="progress-bar-small">
                           <motion.div 
                             className="progress-fill-small"
                             style={{ backgroundColor: '#10b981' }}
                             initial={{ width: 0 }}
-                            animate={{ width: `${Math.round((todayScheduleTasks.filter(t => t.progress >= 100).length / todayScheduleTasks.length) * 100)}%` }}
+                            animate={{ width: `${todayScheduleTasks.length > 0 
+                              ? Math.round((todayScheduleTasks.filter(t => t.progress >= 100).length / todayScheduleTasks.length) * 100)
+                              : 0}%` }}
                             transition={{ duration: 1, delay: 1.2 }}
                           />
                         </div>
@@ -1495,14 +1572,20 @@ export default function StudentDashboardModern() {
                         <BarChart3 className="w-4 h-4" />
                       </div>
                       <div className="stat-content">
-                        <div className="stat-value">{Math.round(todayScheduleTasks.reduce((sum, t) => sum + t.progress, 0) / todayScheduleTasks.length) || 0}%</div>
+                        <div className="stat-value">
+                          {todayScheduleTasks.length > 0 
+                            ? Math.round(todayScheduleTasks.reduce((sum, t) => sum + t.progress, 0) / todayScheduleTasks.length)
+                            : 0}%
+                        </div>
                         <div className="stat-label">Общий прогресс</div>
                         <div className="progress-bar-small">
                           <motion.div 
                             className="progress-fill-small"
                             style={{ backgroundColor: '#8b5cf6' }}
                             initial={{ width: 0 }}
-                            animate={{ width: `${Math.round(todayScheduleTasks.reduce((sum, t) => sum + t.progress, 0) / todayScheduleTasks.length) || 0}%` }}
+                            animate={{ width: `${todayScheduleTasks.length > 0 
+                              ? Math.round(todayScheduleTasks.reduce((sum, t) => sum + t.progress, 0) / todayScheduleTasks.length)
+                              : 0}%` }}
                             transition={{ duration: 1, delay: 1.5 }}
                           />
                         </div>
@@ -1516,7 +1599,13 @@ export default function StudentDashboardModern() {
                       className="unified-quick-action-btn"
                       whileHover={{ y: -2, scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => window.location.href = '/schedule'}
+                      onClick={() => {
+                        try {
+                          router.push('/schedule');
+                        } catch (error) {
+                          console.error('Ошибка при переходе на страницу расписания:', error);
+                        }
+                      }}
                     >
                       <Calendar className="w-4 h-4" />
                       <span>Полное расписание</span>
@@ -1525,7 +1614,13 @@ export default function StudentDashboardModern() {
                       className="unified-quick-action-btn"
                       whileHover={{ y: -2, scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => window.location.href = '/notifications'}
+                      onClick={() => {
+                        try {
+                          router.push('/notifications');
+                        } catch (error) {
+                          console.error('Ошибка при переходе на страницу уведомлений:', error);
+                        }
+                      }}
                     >
                       <Bell className="w-4 h-4" />
                       <span>Уведомления</span>
@@ -1534,7 +1629,13 @@ export default function StudentDashboardModern() {
                       className="unified-quick-action-btn"
                       whileHover={{ y: -2, scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => window.location.href = '/library'}
+                      onClick={() => {
+                        try {
+                          router.push('/library');
+                        } catch (error) {
+                          console.error('Ошибка при переходе на страницу библиотеки:', error);
+                        }
+                      }}
                     >
                       <BookOpen className="w-4 h-4" />
                       <span>Библиотека</span>
@@ -1543,7 +1644,13 @@ export default function StudentDashboardModern() {
                       className="unified-quick-action-btn"
                       whileHover={{ y: -2, scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => window.location.href = '/teachers'}
+                      onClick={() => {
+                        try {
+                          router.push('/teachers');
+                        } catch (error) {
+                          console.error('Ошибка при переходе на страницу преподавателей:', error);
+                        }
+                      }}
                     >
                       <Users className="w-4 h-4" />
                       <span>Преподаватели</span>

@@ -147,14 +147,14 @@ export default function SettingsPageCompact() {
     {
       id: '1',
       device: 'Desktop - Chrome',
-      location: 'Москва, Россия',
+      location: 'Алматы, Казахстан',
       lastActive: '2024-12-20T14:30:00Z',
       current: true
     },
     {
       id: '2',
       device: 'Mobile - Safari',
-      location: 'Москва, Россия',
+      location: 'Астана, Казахстан',
       lastActive: '2024-12-19T18:15:00Z',
       current: false
     }

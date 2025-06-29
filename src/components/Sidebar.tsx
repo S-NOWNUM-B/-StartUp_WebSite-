@@ -31,7 +31,8 @@ import {
   Coffee,
   Zap,
   BookMarked,
-  PenTool
+  PenTool,
+  HelpCircle
 } from 'lucide-react';
 
 interface SidebarItem {
@@ -73,8 +74,7 @@ const sidebarItems: SidebarItem[] = [
   { name: 'Уведомления', href: '/notifications', icon: <Bell className="w-4 h-4" />, category: 'Информация', badge: 8, color: 'var(--accent-orange)' },
   { name: 'События', href: '/calendar', icon: <CalendarDays className="w-4 h-4" />, category: 'Информация', color: 'var(--accent-purple)' },
   { name: 'Профиль', href: '/profile', icon: <User className="w-4 h-4" />, category: 'Личное', color: 'var(--accent-blue)' },
-  { name: 'Обратная связь', href: '/feedback', icon: <MessageSquare className="w-4 h-4" />, category: 'Личное', color: 'var(--accent-green)' },
-  { name: 'Настройки', href: '/settings', icon: <Settings className="w-4 h-4" />, category: 'Личное', color: 'var(--text-secondary)' },
+  { name: 'Поддержка', href: '/feedback', icon: <HelpCircle className="w-4 h-4" />, category: 'Личное', color: 'var(--accent-green)' },
   { name: 'О университете', href: '/about', icon: <Building className="w-4 h-4" />, category: 'Прочее', color: 'var(--accent-blue)' },
   { name: 'Контакты', href: '/contacts', icon: <Phone className="w-4 h-4" />, category: 'Прочее', color: 'var(--accent-green)' },
 ];

@@ -102,7 +102,7 @@ export default function ProfilePageCompact() {
     specialization: 'Информационные системы и технологии',
     enrollmentDate: '2022-09-01',
     birthDate: '2002-03-15',
-    location: 'Москва, Россия',
+    location: 'Алматы, Казахстан',
     gpa: 4.3,
     totalCredits: 150,
     avatar: null,
@@ -377,8 +377,29 @@ export default function ProfilePageCompact() {
         toast.success('Переход к достижениям');
         break;
       case 'share':
-        navigator.clipboard.writeText(`${profile.firstName} ${profile.lastName} - ${profile.specialization}`);
-        toast.success('Информация профиля скопирована');
+        try {
+          const text = `${profile.firstName} ${profile.lastName} - ${profile.specialization}`;
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(() => {
+              toast.success('Информация профиля скопирована в буфер обмена');
+            }).catch((error) => {
+              console.error('Ошибка при копировании профиля:', error);
+              toast.error('Не удалось скопировать информацию профиля');
+            });
+          } else {
+            // Fallback для старых браузеров
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            toast.success('Информация профиля скопирована в буфер обмена');
+          }
+        } catch (error) {
+          console.error('Ошибка при копировании профиля:', error);
+          toast.error('Не удалось скопировать информацию профиля');
+        }
         break;
     }
   };
