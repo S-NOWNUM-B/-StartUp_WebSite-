@@ -21,7 +21,8 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   Target,
-  Settings,
+  Brain,
+  HelpCircle,
   BarChart3,
   Coffee,
   Globe,
@@ -226,7 +227,7 @@ export default function TeachersPageCompact() {
     { id: 'Веб-технологии', name: 'Веб-технологии', icon: Globe, count: teachers.filter(t => t.department === 'Веб-технологии').length },
     { id: 'Базы данных', name: 'Базы данных', icon: Award, count: teachers.filter(t => t.department === 'Базы данных').length },
     { id: 'Математика', name: 'Математика', icon: Target, count: teachers.filter(t => t.department === 'Математика').length },
-    { id: 'Искусственный интеллект', name: 'Искусственный интеллект', icon: Settings, count: teachers.filter(t => t.department === 'Искусственный интеллект').length }
+          { id: 'Искусственный интеллект', name: 'Искусственный интеллект', icon: Brain, count: teachers.filter(t => t.department === 'Искусственный интеллект').length }
   ];
 
   const quickActions: QuickAction[] = useMemo(() => [
@@ -253,9 +254,9 @@ export default function TeachersPageCompact() {
       color: 'var(--accent-blue)'
     },
     {
-      id: 'settings',
-      title: 'НАСТРОЙКИ',
-      icon: <Settings className="w-4 h-4" />,
+              id: 'support',
+        title: 'ПОДДЕРЖКА',
+        icon: <HelpCircle className="w-4 h-4" />,
       description: 'Параметры',
       color: 'var(--accent-green)'
     }

@@ -10,7 +10,7 @@ import {
   Filter,
   Check,
   CheckCircle2,
-  Settings,
+
   ArrowRight,
   MoreHorizontal,
   RefreshCw,
@@ -72,7 +72,7 @@ export default function NotificationPanel({
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'unread' | 'starred' | 'archived'>('all');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'time' | 'priority' | 'type'>('time');
-  const [showSettings, setShowSettings] = useState(false);
+
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [selectedNotifications, setSelectedNotifications] = useState<string[]>([]);
   const [isSelectionMode, setIsSelectionMode] = useState(false);
@@ -349,13 +349,7 @@ export default function NotificationPanel({
             >
               <Download className="w-4 h-4" />
             </button>
-            <button
-              className="control-btn-advanced"
-              onClick={() => setShowSettings(!showSettings)}
-              title="Настройки"
-            >
-              <Settings className="w-4 h-4" />
-            </button>
+
             <button
               className="control-btn-advanced"
               onClick={onClose}

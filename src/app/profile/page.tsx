@@ -7,7 +7,7 @@ import {
   User,
   Award,
   Activity,
-  Settings,
+
   Star,
   Calendar,
   Mail,
@@ -224,7 +224,7 @@ export default function ProfilePageCompact() {
     { id: 'achievements', name: 'Достижения', count: achievements.length },
     { id: 'activity', name: 'Активность', count: recentActivities.length },
     { id: 'skills', name: 'Навыки', count: skills.length },
-    { id: 'settings', name: 'Настройки', count: null }
+
   ];
 
   const quickActions: QuickAction[] = useMemo(() => {
@@ -606,7 +606,7 @@ export default function ProfilePageCompact() {
                       {category.id === 'achievements' && <Trophy className="w-4 h-4" />}
                       {category.id === 'activity' && <Activity className="w-4 h-4" />}
                       {category.id === 'skills' && <Zap className="w-4 h-4" />}
-                      {category.id === 'settings' && <Settings className="w-4 h-4" />}
+        
                     </div>
                     {category.count !== null && (
                       <div className="category-count">{category.count}</div>
@@ -640,7 +640,7 @@ export default function ProfilePageCompact() {
                   {selectedTab === 'achievements' && `${achievements.length} достижений в коллекции`}
                   {selectedTab === 'activity' && `${recentActivities.length} недавних активностей`}
                   {selectedTab === 'skills' && `${skills.length} навыков в развитии`}
-                  {selectedTab === 'settings' && 'Настройки профиля и приватности'}
+        
                 </p>
               </div>
               {editMode && (
@@ -924,83 +924,7 @@ export default function ProfilePageCompact() {
                 </div>
               )}
 
-              {selectedTab === 'settings' && (
-                <div className="settings-section">
-                  <div className="settings-grid">
-                    <div className="settings-card">
-                      <div className="settings-card-header">
-                        <Shield className="w-5 h-5" />
-                        <h4>Приватность</h4>
-                      </div>
-                      <div className="settings-content">
-                        <p>Управление видимостью профиля и персональной информации</p>
-                        <button 
-                          className="settings-btn"
-                          onClick={() => handleProfileAction('privacy')}
-                        >
-                          <Lock className="w-4 h-4" />
-                          <span>Настроить</span>
-                          <ChevronRight className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
 
-                    <div className="settings-card">
-                      <div className="settings-card-header">
-                        <Bell className="w-5 h-5" />
-                        <h4>Уведомления</h4>
-                      </div>
-                      <div className="settings-content">
-                        <p>Настройка email и push-уведомлений</p>
-                        <button 
-                          className="settings-btn"
-                          onClick={() => handleProfileAction('notifications')}
-                        >
-                          <Settings className="w-4 h-4" />
-                          <span>Настроить</span>
-                          <ChevronRight className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="settings-card">
-                      <div className="settings-card-header">
-                        <Palette className="w-5 h-5" />
-                        <h4>Тема интерфейса</h4>
-                      </div>
-                      <div className="settings-content">
-                        <p>Выбор темы оформления и цветовой схемы</p>
-                        <button 
-                          className="settings-btn"
-                          onClick={() => handleProfileAction('theme')}
-                        >
-                          <Eye className="w-4 h-4" />
-                          <span>Изменить</span>
-                          <ChevronRight className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="settings-card">
-                      <div className="settings-card-header">
-                        <Lock className="w-5 h-5" />
-                        <h4>Безопасность</h4>
-                      </div>
-                      <div className="settings-content">
-                        <p>Смена пароля и двухфакторная аутентификация</p>
-                        <button 
-                          className="settings-btn"
-                          onClick={() => handleProfileAction('security')}
-                        >
-                          <Shield className="w-4 h-4" />
-                          <span>Настроить</span>
-                          <ChevronRight className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           </motion.div>
         </div>

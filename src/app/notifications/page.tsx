@@ -12,7 +12,7 @@ import {
   Info,
   Clock,
   User,
-  Settings,
+
   TrendingUp,
   ArrowDownRight,
   CheckCheck,
@@ -25,6 +25,7 @@ import {
   ExternalLink,
   Hash,
   Download,
+  Monitor,
   Bookmark,
   Trash2,
   Eye,
@@ -163,10 +164,10 @@ export default function NotificationsPageCompact() {
         badge: actionRequiredCount > 0 ? `${actionRequiredCount}` : undefined
       },
       {
-        id: 'settings',
-        title: 'НАСТРОЙКИ',
-        icon: <Settings className="w-4 h-4" />,
-        description: 'Конфигурация',
+        id: 'export',
+        title: 'ЭКСПОРТ',
+        icon: <Download className="w-4 h-4" />,
+        description: 'Данные',
         color: 'var(--accent-blue)'
       },
       {
@@ -229,7 +230,7 @@ export default function NotificationsPageCompact() {
   const getCategoryIcon = (category: Notification['category']) => {
     switch (category) {
       case 'academic': return <GraduationCap className="w-4 h-4" />;
-      case 'system': return <Settings className="w-4 h-4" />;
+      case 'system': return <Monitor className="w-4 h-4" />;
       case 'financial': return <DollarSign className="w-4 h-4" />;
       case 'social': return <Users className="w-4 h-4" />;
       case 'administrative': return <Building className="w-4 h-4" />;
@@ -352,8 +353,8 @@ export default function NotificationsPageCompact() {
         setSelectedCategory('all');
         toast.success('Показаны уведомления, требующие действий');
         break;
-      case 'settings':
-        toast.success('Открываю настройки уведомлений');
+      case 'export':
+        toast.success('Экспорт уведомлений запущен');
         break;
       case 'archive':
         toast.success('Открываю архив уведомлений');

@@ -15,7 +15,8 @@ import {
   CheckCircle,
   AlertCircle,
   Play,
-  Settings,
+  Wrench,
+  HelpCircle,
   PlusCircle,
   TrendingUp,
   ArrowUpRight,
@@ -210,7 +211,7 @@ export default function CoursesPageCompact() {
     { id: 'mandatory', name: 'Обязательные', icon: AlertCircle, count: courses.filter(c => c.category === 'mandatory').length },
     { id: 'elective', name: 'Факультативы', icon: Star, count: courses.filter(c => c.category === 'elective').length },
     { id: 'project', name: 'Проекты', icon: Briefcase, count: courses.filter(c => c.category === 'project').length },
-    { id: 'practical', name: 'Практика', icon: Settings, count: courses.filter(c => c.category === 'practical').length }
+          { id: 'practical', name: 'Практика', icon: Wrench, count: courses.filter(c => c.category === 'practical').length }
   ];
 
   const quickActions: QuickAction[] = useMemo(() => [
@@ -237,10 +238,10 @@ export default function CoursesPageCompact() {
       color: 'var(--accent-blue)'
     },
     {
-      id: 'settings',
-      title: 'НАСТРОЙКИ',
-      icon: <Settings className="w-4 h-4" />,
-      description: 'Параметры',
+      id: 'help',
+      title: 'ПОМОЩЬ',
+      icon: <HelpCircle className="w-4 h-4" />,
+      description: 'Поддержка',
       color: 'var(--accent-green)'
     }
   ], []);

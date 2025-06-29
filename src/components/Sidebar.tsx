@@ -18,7 +18,7 @@ import {
   CalendarDays,
   User,
   MessageSquare,
-  Settings,
+
   Building,
   Phone,
   Clock,

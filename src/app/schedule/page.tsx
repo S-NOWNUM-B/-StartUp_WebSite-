@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { useScheduleData, type ScheduleEvent } from '../../hooks/useScheduleData';
-import { 
+import {
   Calendar,
   Clock,
   User,
@@ -28,7 +28,7 @@ import {
   Play,
   Target,
   TrendingUp,
-  Settings,
+
   ArrowUpRight,
   CalendarDays,
   TrendingDown,
@@ -241,9 +241,9 @@ export default function SchedulePageModern() {
           teacher: 'Экзаменатор',
           room: 'Ауд. ' + (100 + Math.floor(Math.random() * 200)),
           type: 'test',
-          status: 'scheduled',
+        status: 'scheduled',
           color: '#ef4444',
-          importance: 'high',
+        importance: 'high',
           attendanceRequired: true,
           description: 'Контрольная работа по пройденному материалу'
         });
@@ -497,7 +497,7 @@ export default function SchedulePageModern() {
             <h1>Расписание занятий</h1>
             <p>{formatDate(currentTime)} • {formatTime(currentTime)}</p>
           </div>
-        </div>
+            </div>
         <div className="header-widget">
           <div className="widget-icon" style={{ color: '#3b82f6' }}>
             <CalendarDays className="w-5 h-5" />
@@ -517,12 +517,12 @@ export default function SchedulePageModern() {
         {/* Верхний ряд - статистика */}
         <div className="schedule-top-row">
           {/* Статистика расписания */}
-          <motion.div 
+      <motion.div 
             className="schedule-stats-compact enhanced"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-          >
+      >
             <div className="stats-header">
               <h3>Статистика расписания</h3>
               <p>Обзор учебной активности</p>
@@ -545,20 +545,20 @@ export default function SchedulePageModern() {
                   <div className="stat-header-enhanced">
                     <div className="stat-icon-enhanced" style={{ color: stat.color }}>
                       {stat.icon}
-                    </div>
+            </div>
                     <div className="stat-trend-indicator">
                       {getTrendIcon(stat.trend)}
-                    </div>
                   </div>
+                            </div>
 
                   <div className="stat-main-content">
                     <div className="stat-value-enhanced">
                       <span className="value-primary">{stat.value}</span>
-                    </div>
+                          </div>
                     <div className="stat-labels">
                       <span className="stat-label-enhanced">{stat.title}</span>
                       <span className="stat-sublabel-enhanced">{stat.sublabel}</span>
-                    </div>
+                            </div>
                   </div>
 
                   {stat.progress !== undefined && (
@@ -571,16 +571,16 @@ export default function SchedulePageModern() {
                           animate={{ width: `${stat.progress}%` }}
                           transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
                         />
-                      </div>
+            </div>
                       <div className="progress-details">
                         <span className="progress-percentage">{stat.progress}%</span>
                         <span className="progress-trend">{stat.trendValue}</span>
-                      </div>
-                    </div>
+              </div>
+                        </div>
                   )}
                 </motion.div>
               ))}
-            </div>
+                            </div>
           </motion.div>
 
           {/* Быстрые действия */}
@@ -593,7 +593,7 @@ export default function SchedulePageModern() {
             <div className="stats-header">
               <h3>Быстрые действия</h3>
               <p>Полезные инструменты</p>
-            </div>
+                          </div>
             <div className="quick-actions-grid-schedule">
               <motion.button 
                 className="quick-action-btn-schedule"
@@ -604,11 +604,11 @@ export default function SchedulePageModern() {
               >
                 <div className="action-icon-schedule">
                   <Download className="w-5 h-5" />
-                </div>
+                        </div>
                 <div className="action-content-schedule">
                   <span className="action-title-schedule">Экспорт</span>
                   <span className="action-subtitle-schedule">Расписание</span>
-                </div>
+                      </div>
               </motion.button>
               
               <motion.button 
@@ -625,10 +625,10 @@ export default function SchedulePageModern() {
               >
                 <div className="action-icon-schedule">
                   <Bell className="w-5 h-5" />
-                </div>
+                  </div>
                 <div className="action-content-schedule">
                   <span className="action-title-schedule">Уведомления</span>
-                  <span className="action-subtitle-schedule">Настройки</span>
+                  <span className="action-subtitle-schedule">Центр</span>
                 </div>
               </motion.button>
               
@@ -648,7 +648,7 @@ export default function SchedulePageModern() {
               >
                 <div className="action-icon-schedule">
                   <Plus className="w-5 h-5" />
-                </div>
+              </div>
                 <div className="action-content-schedule">
                   <span className="action-title-schedule">Добавить</span>
                   <span className="action-subtitle-schedule">Событие</span>
@@ -676,11 +676,11 @@ export default function SchedulePageModern() {
                 </div>
               </motion.button>
             </div>
-          </motion.div>
+        </motion.div>
         </div>
 
         {/* Расписание - переключатель режимов и календарь */}
-        <motion.div 
+          <motion.div
           className="schedule-stats-compact enhanced large-unified"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -706,8 +706,8 @@ export default function SchedulePageModern() {
                 >
                   Месяц
                 </button>
-              </div>
-            </div>
+                  </div>
+                  </div>
             
             <div className="navigation-controls">
               <button 
@@ -715,7 +715,7 @@ export default function SchedulePageModern() {
                 onClick={() => viewMode === 'month' ? navigateMonth('prev') : navigateWeek('prev')}
               >
                 <ChevronLeft className="w-4 h-4" />
-              </button>
+                </button>
               <span className="period-title">
                 {viewMode === 'month' 
                   ? `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`
@@ -760,8 +760,8 @@ export default function SchedulePageModern() {
                   <div key={day} className="calendar-weekday">
                     {day}
                   </div>
-                ))}
-              </div>
+              ))}
+            </div>
               
               {/* Сетка календаря */}
               <div className="calendar-grid">
@@ -803,7 +803,7 @@ export default function SchedulePageModern() {
                                <span className="event-title-mini">
                                  {event.title.length > 12 ? event.title.substring(0, 12) + '...' : event.title}
                                </span>
-                             </motion.div>
+          </motion.div>
                            ))}
                            {dayData.events.length > 2 && (
                              <motion.div 
@@ -818,7 +818,7 @@ export default function SchedulePageModern() {
                                +{dayData.events.length - 2} ещё
                              </motion.div>
                            )}
-                         </div>
+              </div>
                       </>
                     )}
                   </motion.div>
@@ -835,24 +835,24 @@ export default function SchedulePageModern() {
                 const isToday = weekDate && weekDate.toDateString() === new Date().toDateString();
                 
                 return (
-                  <motion.div 
+          <motion.div 
                     key={dayName}
                     className={`schedule-day-card ${isToday ? 'current-day' : ''}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 + dayIndex * 0.05 }}
                   >
                     <div className="day-header-schedule">
                       <h4>{dayLabel}</h4>
                       <span className="day-date">{weekDate ? weekDate.getDate() : '-'}</span>
                       {isToday && <div className="today-indicator">Сегодня</div>}
-                    </div>
+                      </div>
                     
                     <div className="day-events-schedule">
                       {dayEvents.length > 0 ? (
                         dayEvents.map((event, eventIndex) => {
                           const statusInfo = getStatusInfo(event.status);
-                          return (
+                return (
                             <motion.div 
                               key={event.id}
                               className="schedule-event-item"
@@ -869,10 +869,10 @@ export default function SchedulePageModern() {
                               <div className="event-room-schedule">{event.room}</div>
                               <div className="event-type-schedule" style={{ color: event.color }}>
                                 {getTypeIcon(event.type)}
-                              </div>
+                    </div>
                               <div className="event-status-schedule" style={{ color: statusInfo.color }}>
                                 {statusInfo.icon}
-                              </div>
+                    </div>
                             </motion.div>
                           );
                         })
@@ -883,17 +883,17 @@ export default function SchedulePageModern() {
                   </motion.div>
                 );
               })}
-            </div>
+              </div>
           )}
-        </motion.div>
+          </motion.div>
 
         {/* Ближайшие события */}
-        <motion.div 
+          <motion.div
           className="schedule-stats-compact enhanced"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            >
           <div className="stats-header">
             <h3>Ближайшие события</h3>
             <p>Что вас ждет сегодня</p>
@@ -986,11 +986,11 @@ export default function SchedulePageModern() {
                 <div className="quick-info-section">
                   <div className="info-card time-card">
                     <Clock className="w-5 h-5" />
-                    <div>
+              <div>
                       <span className="info-label">Время</span>
                       <span className="info-value">{selectedEvent.time} - {selectedEvent.endTime}</span>
-                    </div>
-                  </div>
+              </div>
+                </div>
                   
                   <div className="info-card teacher-card">
                     <User className="w-5 h-5" />
@@ -999,37 +999,37 @@ export default function SchedulePageModern() {
                       <span className="info-value">{selectedEvent.teacher}</span>
                     </div>
                   </div>
-                  
+
                   <div className="info-card location-card">
                     <MapPin className="w-5 h-5" />
                     <div>
                       <span className="info-label">Аудитория</span>
                       <span className="info-value">{selectedEvent.room}</span>
-                    </div>
+                      </div>
+                      </div>
                   </div>
-                </div>
 
                 {/* Статус и приоритет */}
                 <div className="status-section">
                   <div className="status-badge" style={{ backgroundColor: getStatusInfo(selectedEvent.status).color }}>
                     {getStatusInfo(selectedEvent.status).icon}
                     <span>{getStatusInfo(selectedEvent.status).text}</span>
-                  </div>
+                        </div>
                   
                   {selectedEvent.importance === 'high' && (
                     <div className="priority-badge-high">
                       <Star className="w-4 h-4" />
                       <span>Высокий приоритет</span>
-                    </div>
+                  </div>
                   )}
                   
                   {selectedEvent.attendanceRequired && (
                     <div className="attendance-badge">
                       <CheckCircle className="w-4 h-4" />
                       <span>Обязательное посещение</span>
-                    </div>
+                        </div>
                   )}
-                </div>
+                        </div>
 
                 {/* Описание */}
                 {selectedEvent.description && (
@@ -1063,7 +1063,7 @@ export default function SchedulePageModern() {
                           </motion.button>
                         </motion.div>
                       ))}
-                    </div>
+                          </div>
                   </div>
                 )}
 
@@ -1074,10 +1074,10 @@ export default function SchedulePageModern() {
                     <div className="homework-card">
                       <Target className="w-5 h-5" />
                       <p>{selectedEvent.homework}</p>
-                    </div>
+                          </div>
+                        </div>
+                      )}
                   </div>
-                )}
-              </div>
 
               {/* Действия */}
               <div className="modal-actions-new">
@@ -1158,7 +1158,7 @@ export default function SchedulePageModern() {
                   <Calendar className="w-4 h-4" />
                   <span>В календарь</span>
                 </motion.button>
-              </div>
+                  </div>
             </motion.div>
           </motion.div>
         )}
@@ -1262,13 +1262,13 @@ export default function SchedulePageModern() {
                         {event.attendanceRequired && (
                           <div className="attendance-indicator">
                             <CheckCircle className="w-3 h-3" />
-                          </div>
-                        )}
-                      </div>
-                    </motion.div>
+              </div>
+              )}
+            </div>
+          </motion.div>
                   );
                 })}
-              </div>
+        </div>
 
               {/* Действия */}
               <div className="modal-actions-new">
@@ -1326,7 +1326,7 @@ export default function SchedulePageModern() {
                   <Copy className="w-4 h-4" />
                   <span>Копировать расписание</span>
                 </motion.button>
-              </div>
+      </div>
             </motion.div>
           </motion.div>
         )}
